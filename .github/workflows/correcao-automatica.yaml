@@ -21,7 +21,7 @@ jobs:
           python-version: '3.10'
 
       - name: Instalar Dependências
-        run: pip install google-generativeai requests PyGithub
+        run: pip install google-genai PyGithub requests
 
       - name: Executar Avaliação do Gemini
         env:
