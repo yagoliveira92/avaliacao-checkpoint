@@ -1,4 +1,6 @@
+import "package:checkpoint/widgets/banner_homescreen.dart";
 import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
 
 class HomeScreen extends StatefulWidget {
 
@@ -15,30 +17,58 @@ class _HomeScreen extends State<HomeScreen> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () { Scaffold.of(context).openDrawer(); },
-                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              );
-            },
+          leading: Icon(
+            Icons.menu,
+            size: 40,
           ),
-        title: Text("UseDev"),
-        centerTitle: true,
-        actions: <Widget>[
-          Icon(
-            Icons.person_outline_outlined,
-            size: 24,
-            semanticLabel: "Usuário",
-          ),
-          Icon(
-            Icons.add_shopping_cart_outlined,
-            size: 24,
-            semanticLabel: "Carrinho",
-          ),
-        ]
+          title: Image.asset("assets/logo-usedev.png", height: 40),
+          centerTitle: true,
+          actions: [
+            Icon(
+              Icons.person_outline_outlined,
+              size: 40,
+              semanticLabel: "Usuário",
+            ),
+            SizedBox(width:25),
+            Icon(
+              Icons.shopping_cart_outlined,
+              size: 40,
+              semanticLabel: "Carrinho",
+            ),
+            SizedBox(width:25),
+          ]
       ),
+      body: SingleChildScrollView(
+          child: Column(
+        spacing: 20,
+        crossAxisAlignment: .stretch,
+        children: [
+          BannerHomescreen(),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Text(
+              "Categorias",
+              textAlign: .center,
+              style: GoogleFonts.orbitron(
+                fontSize: 28,
+                fontWeight: .bold,
+              )
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Text(
+              textAlign: .center,
+              "De roupas a gadgets tecnológicos temos tudo para atender suas paixões e hobbies com estilo e autenticidade.",
+              style: GoogleFonts.poppins(
+                  fontSize: 18,
+                  color: Color(0xFF444444),
+                ),
+              ),
+            ),
+        ],
+      )
+    )
     );
   }
 }
