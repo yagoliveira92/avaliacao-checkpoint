@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_usedev/src/widgets/hero_section_widget.dart';
 import 'package:projeto_usedev/src/widgets/product_card_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projeto_usedev/src/data/produtos.dart';
 
 
 class InitialScreen extends StatefulWidget{
@@ -12,30 +13,6 @@ class InitialScreen extends StatefulWidget{
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-
-  final List<Map<String, String>> produtos = [
-    {
-      'name' : 'Camiseta Capy',
-      'price': '28,00',
-      'image': 'assets/camisa_capy.png'
-    },
-    {
-      'name' : 'Mousepad Café',
-      'price': '18,00',
-      'image': 'assets/mousepad_cafe.png' 
-    },
-    {
-      'name' : 'Caneca Bug',
-      'price': '28,00',
-      'image': 'assets/caneca_bug.png'
-    },
-    {
-      'name' : 'Boné 404',
-      'price': '25,00',
-      'image': 'assets/bone_404.png'
-    },
-  ];
-
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -75,7 +52,7 @@ class _InitialScreenState extends State<InitialScreen> {
 
                 return ProductCardWidget(
                   name: produto['name']!,
-                  price: produto ['price']!,
+                  price: produto['price']!,
                   image: produto['image']!
                 );
               },
