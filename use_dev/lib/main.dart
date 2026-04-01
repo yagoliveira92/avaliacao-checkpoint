@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'src/tela_inicial.dart'; 
 import 'src/tela_card.dart';
-
+import 'src/tela_subscripition.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,6 +60,7 @@ class HomePageCorrida extends StatelessWidget {
           children: [
             InitialScreen(), 
             ProductListScreen(),
+            SubscriptionScreen(),
           ],
         ),
       ),
