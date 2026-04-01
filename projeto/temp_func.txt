@@ -1,0 +1,94 @@
+﻿  Widget _barradeInformacoes() {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+      child: Column(
+        children: [
+          // Linha Superior com Logo e Botões
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // 1. Logotipo USE DEV
+              Image.asset(
+                'assets/images/image.png',
+                height: 40,
+                fit: BoxFit.contain,
+              ),
+
+              const Spacer(), // Empurra os itens para os cantos
+
+               const Text(
+                'Sobre nós',
+                style: TextStyle(
+                  color: Color(0xFF333333), 
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              
+              const SizedBox(width: 40),
+
+              // 2. Seção do lado direito (Login + Icones)
+              Row(
+                children: [
+                  const Text(
+                    'Login',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: Color(0xFF1E1E2C),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.person_outline,
+                      size: 28,
+                      color: Color(0xFF1E1E2C),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.shopping_cart_outlined,
+                      size: 28,
+                      color: Color(0xFF1E1E2C),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          
+          const SizedBox(height: 20), // Espaçamento entre os itens de cima e a barra de busca
+          
+          // 3. Campo de Busca (O que você procura?) ABAIXO DE TUDO
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.grey[200], // Fundo cinza clarinho
+              borderRadius: BorderRadius.circular(25), // Borda redonda
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: const Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'O que você procura?',
+                      hintStyle: TextStyle(color: Colors.black54),
+                      border: InputBorder.none, // Tira a linha preta
+                      isDense: true,
+                    ),
+                  ),
+                ),
+                Icon(Icons.search, color: Colors.black54, size: 24),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
