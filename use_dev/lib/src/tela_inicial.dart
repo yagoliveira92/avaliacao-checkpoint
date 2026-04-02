@@ -52,7 +52,7 @@ class InitialScreen extends StatelessWidget {
                   'Hora de abraçar seu',
                   style: TextStyle(
                     
-                    fontSize: 32,
+                    fontSize: 26,
                     fontFamily: GoogleFonts.orbitron().fontFamily,
                     color: const Color(0xFFFF55DF),
                     fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class InitialScreen extends StatelessWidget {
                 Text(
                   'lado geek!',
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 26,
                     fontFamily: GoogleFonts.orbitron().fontFamily,
                     color: const Color(0xFF8FFF24),
                     fontWeight: FontWeight.bold, 
