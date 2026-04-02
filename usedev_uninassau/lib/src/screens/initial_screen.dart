@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:usedev_uninassau/src/widgets/hero_section_widget.dart';
 import 'package:usedev_uninassau/src/widgets/product_card_widget.dart';
-
+import 'package:usedev_uninassau/src/widgets/subscription_section_widget.dart';
 
 
 class InitialScreen extends StatefulWidget {
@@ -51,6 +51,7 @@ class _InitialScreenState extends State<InitialScreen> {
                 preco: '10$index,00',
               ),
             ),
+            SubscriptionSectionWidget(),
           ],
         ),
       ),
