@@ -17,24 +17,20 @@ class _HomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.menu, size: 40),
-        title: Image.asset("assets/logo-usedev.png", height: 40),
-        centerTitle: true,
-        actions: [
-          Icon(
-            Icons.person_outline_outlined,
-            size: 40,
-            semanticLabel: "Usuário",
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          child: AppBar(
+            leading: Icon(Icons.menu, size: 40),
+            title: Image.asset("assets/logo-usedev.png", height: 50),
+            centerTitle: true,
+            actions: [
+              Icon(Icons.person_outline_outlined, size: 40),
+              Icon(Icons.shopping_cart_outlined, size: 40),
+            ],
           ),
-          const SizedBox(width: 25),
-          Icon(
-            Icons.shopping_cart_outlined,
-            size: 40,
-            semanticLabel: "Carrinho",
-          ),
-          const SizedBox(width: 25),
-        ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
