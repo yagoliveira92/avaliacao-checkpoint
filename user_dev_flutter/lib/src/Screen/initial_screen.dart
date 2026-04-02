@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:use_dev/src/widget/product_card_widget.dart';
-import 'package:use_dev/src/widget/subscripition_selector_widget.dart';
+import 'package:use_dev/src/widget/subscription_selector_widget.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
