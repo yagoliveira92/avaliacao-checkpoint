@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/Home_Page.dart';
+import 'package:flutter_application_1/src/widgets/home_page.dart';
 // Aqui virá a importação do arquivo da tela de login que vamos criar
 
 void main() {

@@ -1,5 +1,8 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'primary_page.dart';
+import 'enrollment_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,7 +18,7 @@ class HomePage extends StatelessWidget {
               _barradeInformacoes(),
               // Banner maior: imagem como fundo, imagem hero em cima, frase abaixo da imagem e botão abaixo da frase
               Container(
-                height: MediaQuery.of(context).size.height * 0.55,
+                height: MediaQuery.of(context).size.height * 0.65,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -31,7 +34,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         Image.asset(
                           'assets/images/Hero.png',
-                          width: MediaQuery.of(context).size.width * 0.55,
+                          width: MediaQuery.of(context).size.width * 0.85,
                         ),
                         SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                         RichText(
@@ -41,7 +44,7 @@ class HomePage extends StatelessWidget {
                               TextSpan(
                                 text: 'Hora de\nabraçar\nseu ',
                                 style: GoogleFonts.orbitron(
-                                  fontSize: MediaQuery.of(context).size.width < 600 ? 20 : 32,
+                                  fontSize: MediaQuery.of(context).size.width < 600 ? 30 : 32,
                                   fontWeight: FontWeight.w700,
                                   height: 1.1,
                                   color: const Color(0xFFFF55DF),
@@ -50,7 +53,7 @@ class HomePage extends StatelessWidget {
                               TextSpan(
                                 text: 'lado geek!',
                                 style: GoogleFonts.orbitron(
-                                  fontSize: MediaQuery.of(context).size.width < 600 ? 20 : 32,
+                                  fontSize: MediaQuery.of(context).size.width < 600 ? 30 : 32,
                                   fontWeight: FontWeight.w700,
                                   height: 1.1,
                                   color: const Color(0xFF8FFF24),
@@ -72,7 +75,7 @@ class HomePage extends StatelessWidget {
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
                               ),
-                              minimumSize: MaterialStateProperty.all(Size(double.infinity, 40)),
+                              minimumSize: MaterialStateProperty.all(Size(double.infinity, 55)),
                               padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 24)),
                             ),
                             child: Text(
@@ -90,6 +93,8 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+              PrimaryPage(),
+              const EnrollmentPage(),
             ],
           ),
         ),
