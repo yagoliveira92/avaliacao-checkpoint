@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,17 +13,81 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               _barradeInformacoes(),
-              SizedBox(
-                height: 300,
+              // Banner maior: imagem como fundo, imagem hero em cima, frase abaixo da imagem e botão abaixo da frase
+              Container(
+                height: MediaQuery.of(context).size.height * 0.55,
                 width: double.infinity,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Positioned.fill(
-                      child: Image.asset('assets/images/Banner.png', fit: BoxFit.cover),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/Banner.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset(
+                          'assets/images/Hero.png',
+                          width: MediaQuery.of(context).size.width * 0.55,
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Hora de\nabraçar\nseu ',
+                                style: GoogleFonts.orbitron(
+                                  fontSize: MediaQuery.of(context).size.width < 600 ? 20 : 32,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.1,
+                                  color: const Color(0xFFFF55DF),
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'lado geek!',
+                                style: GoogleFonts.orbitron(
+                                  fontSize: MediaQuery.of(context).size.width < 600 ? 20 : 32,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.1,
+                                  color: const Color(0xFF8FFF24),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(const Color(0xFF7A00FF)),
+                              elevation: MaterialStateProperty.all(0),
+                              shadowColor: MaterialStateProperty.all(Colors.transparent),
+                              overlayColor: MaterialStateProperty.all(Colors.transparent),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                              ),
+                              minimumSize: MaterialStateProperty.all(Size(double.infinity, 40)),
+                              padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 24)),
+                            ),
+                            child: Text(
+                              'Ver as novidades!',
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Image.asset('assets/images/Hero.png', height: 200),
-                  ],
+                  ),
                 ),
               ),
             ],
