@@ -31,9 +31,33 @@ class HeroSectionWidget extends StatelessWidget {
             ),
             TextSpan(
               text: 'Hora de abraçar seu ',
-              style: TextStyle(color: Color(0xFFFF55DF))
-            )
-          )
+              style: TextStyle(color: Color(0xFFFF55DF)),
+              children: [
+                TextSpan(
+                  text: 'lado geek!',
+                  style: TextStyle(color: Color(0xFF8FFF24)),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 25),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFF780BF7),
+              padding: .symmetric(horizontal: 30, vertical: 25),
+            ),
+            child: Text(
+              'Ver as Novidades',
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 25,
+                color: Colors.white,
+                fontWeight: .bold,
+              ),
+            ),
+          ),
+          SizedBox(height: 50),
         ],
       ),
     );

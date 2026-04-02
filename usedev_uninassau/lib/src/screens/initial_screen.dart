@@ -25,10 +25,24 @@ class _InitialScreenState extends State<InitialScreen> {
           SizedBox(width: 25),
         ],
       ),
-      body: Column(
-        spacing: 28,
-        crossAxisAlignment: .stretch,
-        children: [HeroSectionWidget()],
+      body: SingleChildScrollView(
+        child: Column(
+          spacing: 20,
+          crossAxisAlignment: .stretch,
+          children: [
+            HeroSectionWidget(),
+            Text(
+              'Promos Especiais',
+              textAlign: .center,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: .bold,
+                color: Color(0xFF0B254B),
+                fontFamily: 'Montserrat'
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
