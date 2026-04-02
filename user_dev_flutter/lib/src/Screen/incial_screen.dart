@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:use_dev/src/product_card_widget.dart';
-import 'package:use_dev/src/subscripition_selector_widget.dart';
+import 'package:use_dev/src/widget/product_card_widget.dart';
+import 'package:use_dev/src/widget/subscripition_selector_widget.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -161,10 +161,17 @@ class _InitialScreenState extends State<InitialScreen> {
             ),
 
             const SizedBox(height: 40),
-            const ProductCardWidget(
-              url: 'https://placehold.co/600x400/png',
-              titulo: 'Produto 1',
-              preco: 'R\$ 99,90',
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return ProductCardWidget(
+                  url: 'https://placehold.co/600x600/png',
+                  titulo: 'Produto $index',
+                  preco: '${index * 100},00',
+                );
+              },
             ),
             const SubscripitionSelectorWidget(),
           ],
