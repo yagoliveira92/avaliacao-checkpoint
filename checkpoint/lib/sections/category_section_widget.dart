@@ -8,38 +8,36 @@ class CategorySectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(color: Color(0xFFFFFFFF)),
-      child: Column(
-        children: [
-          Text(
-            "Categorias",
-            style: GoogleFonts.orbitron(
-              fontSize: 27,
-              fontWeight: .bold,
-              color: Color(0xFF0B254B),
-            ),
+    return Column(
+      children: [
+        const SizedBox(height: 16),
+        Text(
+          "Categorias",
+          style: GoogleFonts.orbitron(
+            fontSize: 27,
+            fontWeight: .bold,
+            color: Color(0xFF0B254B),
           ),
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              "De roupas a gadgets tecnológicos temos tudo para atender suas paixões e hobbies com estilo e autenticidade.",
-              textAlign: .center,
-              style: GoogleFonts.poppins(
-                fontSize: 18,
-                color: Color(0xFF5E6E89),
-              ),
-            ),
+        ),
+        const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            "De roupas a gadgets tecnológicos temos tudo para atender suas paixões e hobbies com estilo e autenticidade.",
+            textAlign: .center,
+            style: GoogleFonts.poppins(fontSize: 18, color: Color(0xFF5E6E89)),
           ),
-          const SizedBox(height: 20),
+        ),
+        const SizedBox(height: 20),
 
-          ...categorys.map((category) => CardCategoryWidget(
+        ...categorys.map(
+          (category) => CardCategoryWidget(
             nome: category["nome"]!,
             url: category["url"]!,
-          )),
-        ],
-      ),
+          ),
+        ),
+        const SizedBox(height: 40),
+      ],
     );
   }
 }
