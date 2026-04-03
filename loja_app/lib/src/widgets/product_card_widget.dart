@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductCardWidget extends StatelessWidget {
   final String name;
@@ -27,18 +28,17 @@ class ProductCardWidget extends StatelessWidget {
           Container(
             height: 180,
             width: double.infinity,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-            ),
-            clipBehavior: Clip.hardEdge,
-            child: Image.network(
+            alignment: Alignment.center,
+            color: Colors.white,
+            child: Image.asset(
               image,
+              width: 180,
+              height: 159,
+              alignment: Alignment.center,
               fit: BoxFit.cover,
             ),
           ),
-
           const SizedBox(height: 10),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
@@ -46,7 +46,8 @@ class ProductCardWidget extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.orbitron().fontFamily,
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
                     color: Colors.black87,
@@ -63,7 +64,6 @@ class ProductCardWidget extends StatelessWidget {
               ],
             ),
           ),
-
           const SizedBox(height: 10),
         ],
       ),
