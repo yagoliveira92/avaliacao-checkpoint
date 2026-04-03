@@ -1,4 +1,4 @@
-final category = [
+final categorys = [
   {
     "nome": "Roupas",
     "url": "assets/categoryImages/CategoriaRoupas.png",

@@ -48,19 +48,14 @@ class _HomeScreen extends State<HomeScreen> {
                 style: GoogleFonts.orbitron(fontSize: 28, fontWeight: .bold),
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 8,
-              itemBuilder: (context, index) {
-                final product = products[index];
 
-                return CardProduce(
-                  nome: product["nome"]!,
-                  url: product["url"]!,
-                  valor: product["valor"]!,
-                );
-              },
-            ),
+            // Renderização da Lista de Produtos
+            ...products.map((product) => CardProduce(
+              nome: product["nome"]!,
+              url: product["url"]!,
+              valor: product["valor"]!,
+            )),
+
             TextButton(
               onPressed: () {},
               child: Text(

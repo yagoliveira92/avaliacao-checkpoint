@@ -21,11 +21,12 @@ class CardCategoryWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: .stretch,
         children: [
-          Image.asset(url, height: 250, width: double.infinity, fit: .cover),
+          Image.asset(url, height: 275, width: double.infinity, fit: .cover),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Text(
               nome,
+              textAlign: .center,
               style: GoogleFonts.orbitron(fontSize: 27, fontWeight: .bold),
             ),
           ),
