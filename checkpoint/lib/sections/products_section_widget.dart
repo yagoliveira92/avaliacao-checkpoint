@@ -19,13 +19,12 @@ class ProductsSectionWidget extends StatelessWidget {
           ),
         ),
 
-        // Renderização da Lista de Produtos
         ...products.map((product) => CardProduce(
           nome: product["nome"]!,
           url: product["url"]!,
           valor: product["valor"]!,
         )),
-
+        const SizedBox(height: 25),
         TextButton(
           onPressed: () {},
           child: Text(
@@ -38,7 +37,7 @@ class ProductsSectionWidget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 50),
       ],
     );
   }

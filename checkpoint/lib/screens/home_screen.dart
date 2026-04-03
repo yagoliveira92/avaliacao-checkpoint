@@ -32,10 +32,10 @@ class _HomeScreen extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          spacing: 20,
           crossAxisAlignment: .stretch,
           children: [
             BannerHomescreen(),
+            const SizedBox(height: 20),
             CategorySectionWidget(),
             ProductsSectionWidget(),
             SubscriptionSectionWidget(),
