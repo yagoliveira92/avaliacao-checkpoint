@@ -1,45 +1,22 @@
 import 'package:flutter/material.dart';
+import 'src/screens/initial_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final List<Map<String, String>> produtos = [
-    {
-      "nome": "Camisa",
-      "preco": "R\$ 50",
-      "imagem": "https://via.placeholder.com/150"
-    },
-    {
-      "nome": "Tênis",
-      "preco": "R\$ 200",
-      "imagem": "https://via.placeholder.com/150"
-    },
-    {
-      "nome": "Boné",
-      "preco": "R\$ 30",
-      "imagem": "https://via.placeholder.com/150"
-    },
-  ];
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text("Minha Loja")),
-        body: ListView(
-          children: produtos.map((produto) {
-            return Card(
-              child: ListTile(
-                leading: Image.network(produto["imagem"]!),
-                title: Text(produto["nome"]!),
-                subtitle: Text(produto["preco"]!),
-              ),
-            );
-          }).toList(),
-        ),
+      debugShowCheckedModeBanner: false,
+      title: 'UseDev',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      home: const InitialScreen(),
     );
   }
 }
