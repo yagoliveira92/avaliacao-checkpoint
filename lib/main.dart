@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 211, 117, 117),
         elevation: 0,
-        // 1. Logo à esquerda
+        // Logo na esquerda
         title: Text(
           "NERD UNIVERSE",
           style: GoogleFonts.orbitron(
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
 
-        // 2. Ícones à direita
+        //  icones na direita
         actions: [
           IconButton(
             icon: Icon(Icons.person_outline, color: Colors.black),

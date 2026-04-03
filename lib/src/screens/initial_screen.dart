@@ -1,5 +1,7 @@
+import 'package:avaliacao_checkpoint/src/screens/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:avaliacao_checkpoint/src/screens/widgets/home_banner.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InitialScreen  extends StatefulWidget {
 
@@ -9,7 +11,7 @@ class InitialScreen  extends StatefulWidget {
     State<InitialScreen> createState() => _InitialScreenState();
   }
 
-class _InitialScreenState extends State<InitialScreen> {
+  class _InitialScreenState extends State<InitialScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -41,18 +43,17 @@ class _InitialScreenState extends State<InitialScreen> {
               child: TextField(
                 decoration: InputDecoration(
                   
-                  hintText: 'O que você procura?',// 1. O texto que aparece clarinho
-                  hintStyle: const TextStyle(color: Color(0xFF444444)), 
+                  hintText: 'O que você procura?',
                   
                   
                   suffixIcon: const Icon(Icons.search, color: Colors.black), // O ícone da lupa no final 
                   
                   
-                  filled: true, // A cor de fundo cinza clara
+                  filled: true,
                   fillColor: const Color(0xFFEFEFEF), 
                   
                   
-                  border: OutlineInputBorder( // Deixando as bordas redondas
+                  border: OutlineInputBorder( // Deixa as bordas redondas
                     borderRadius: BorderRadius.circular(30), 
                     borderSide: BorderSide.none, 
                   ),
@@ -67,12 +68,50 @@ class _InitialScreenState extends State<InitialScreen> {
           Icon( Icons.person_outline), 
           Icon( Icons.shopping_cart_outlined)],
       ),
-      body: const Column(
-  children: [
-    HomeBanner(), // Adicione o banner aqui
-    // Outros conteúdos da home virão aqui abaixo
-  ],
-)
+      body: SingleChildScrollView( //  Permite que a página toda role para baixo
+  child: Column(
+    children: [
+      const HomeBanner(), // o banner que eu fiz
+      
+      const SizedBox(height: 20), // espaço entre o banner e o título
+      
+      // 2. Título da Seção
+      Text(
+        'Promos especiais',
+        style: GoogleFonts.orbitron(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: const Color(0xFF090129),
+        ),
+      ),
+
+      const SizedBox(height: 10),
+
+      // 3. O seu GridView
+      GridView.builder(
+        shrinkWrap: true, // isso faz o Grid ocupar só o espaço que precisa
+        physics: const NeverScrollableScrollPhysics(), // O scroll sera o da página toda
+        padding: const EdgeInsets.all(20),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // 2 cards por linha
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
+          childAspectRatio: 1.00, 
+        ),
+        itemCount: 6, // Número de produtos
+        itemBuilder: (context, index) {
+          
+          return const ProductCard( // Aqui chama o widget que eu fiz do card
+            name: 'Camiseta Capy', 
+            price: '28,00', 
+            imagePath: 'assets/images/camisa_capivara.png', 
+          );
+        },
+      ),
+    ],
+  ),
+),
+
 );
-}
+} 
 }
