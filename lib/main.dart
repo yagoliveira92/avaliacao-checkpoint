@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 
 void main() {
-  runApp(const LoginApp());
+  runApp(const MyApp());
 }
 
-class LoginApp extends StatelessWidget {
-  const LoginApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Checkpoint Uninassau',
+      title: 'UseDev',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primaryColor: const Color(0xFF213366)),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7B2FBE)),
+        useMaterial3: true,
+      ),
       home: const LoginScreen(),
     );
   }
