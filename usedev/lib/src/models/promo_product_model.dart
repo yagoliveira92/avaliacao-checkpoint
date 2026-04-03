@@ -40,6 +40,36 @@ class PromoProductModel {
         price: 28.00,
         imageUrl: 'assets/images/Cards_produtos/Cards_Home/Mobile/Imagem_produto_Caneca_bug_Mobile.png',
       ),
+      PromoProductModel(
+        id: '4',
+        name: 'Boné 404',
+        price: 25.00,
+        imageUrl: 'assets/images/Cards_produtos/Cards_Home/Mobile/Imagem_produto_Bone_404_Mobile.png',
+      ),
+      PromoProductModel(
+        id: '5',
+        name: 'Quadro While',
+        price: 22.00,
+        imageUrl: 'assets/images/Cards_produtos/Cards_Home/Mobile/Imagem_produto_Quadro_Mobile.png',
+      ),
+      PromoProductModel(
+        id: '6',
+        name: 'Copo Vida de Dev',
+        price: 28.00,
+        imageUrl: 'assets/images/Cards_produtos/Cards_Home/Mobile/Imagem_produto_Copo_Mobile.png',
+      ),
+      PromoProductModel(
+        id: '7',
+        name: 'abridor de garrafa',
+        price: 12.00,
+        imageUrl: 'assets/images/Cards_produtos/Cards_Home/Mobile/Imagem_produto_Abridor_Mobile.png',
+      ),
+      PromoProductModel(
+        id: '8',
+        name: 'Camisetas estagios',
+        price: 38.00,
+        imageUrl: 'assets/images/Cards_produtos/Cards_Home/Mobile/Imagem_produto_Camiseta_Mobile.png',
+      ),
     ];
   }
 }

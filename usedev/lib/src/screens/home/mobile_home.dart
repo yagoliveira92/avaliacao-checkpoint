@@ -11,6 +11,7 @@ import 'package:usedev/src/widgets/home/promo_section.dart';
 import 'package:usedev/src/widgets/home/product_highlight_grid.dart';
 import 'package:usedev/src/widgets/home/newsletter_section.dart';
 import 'package:usedev/src/widgets/home/footer_section.dart';
+import 'package:usedev/src/core/constants/routes.dart';
 
 class MobileHome extends StatefulWidget {
   const MobileHome({super.key});
@@ -119,7 +120,7 @@ class _MobileHomeState extends State<MobileHome> {
             title: const Text('Perfil'),
             onTap: () {
               Navigator.pop(context);
-              _showLoginDialog();
+              Navigator.pushNamed(context, AppRoutes.login);
             },
           ),
           const Divider(),

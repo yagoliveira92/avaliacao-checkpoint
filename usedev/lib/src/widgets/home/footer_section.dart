@@ -160,7 +160,7 @@ class FooterSection extends StatelessWidget {
   }
 }
 
-// Alinhar classe abaixo à esquerda, com largura de 240 e espaçamento entre itens conforme Figma
+// ✅ AQUI ESTÁ A ÚNICA MUDANÇA
 class _FooterLinks extends StatelessWidget {
   final String title;
   final List<String> items;
@@ -173,9 +173,9 @@ class _FooterLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 240, 
+      width: 240, // ✅ largura do Figma
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, 
+        crossAxisAlignment: CrossAxisAlignment.start, // ✅ esquerda
         children: [
           Text(
             title,
