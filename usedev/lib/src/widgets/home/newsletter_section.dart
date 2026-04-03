@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:usedev/src/core/theme/colors.dart';
 
 class NewsletterSection extends StatefulWidget {
   const NewsletterSection({super.key});
@@ -13,68 +15,111 @@ class _NewsletterSectionState extends State<NewsletterSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF8FFF24), Color(0xFF8FFF24)],
-        ),
-        borderRadius: BorderRadius.circular(16),
-      ),
+      alignment: Alignment.center,
+      width: double.infinity,
+      color: AppColors.accentGreen, 
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40), 
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 40,
         children: [
-          const Text('INSCREVACE PARA GANHAR DESCONTOS!'),
-          const SizedBox(height: 8),
-          const Text(
-            'Cadastre seu email, receba novidades e descontos imperdíveis antes de todo mundo!',
-            style: TextStyle(
-              color: Colors.white,
+          // === TÍTULO ===
+          Text(
+            'Inscreva-se para ganhar descontos!',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.orbitron(
               fontSize: 16,
-              fontWeight: FontWeight.w600,
-              height: 1.4,
+              fontWeight: FontWeight.w700,
+              color: AppColors.primaryDark,
+              height: 1.2,
             ),
           ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: _emailController,
-            keyboardType: TextInputType.emailAddress,
-            style: const TextStyle(color: Colors.white),
-            decoration: InputDecoration(
-              hintText: 'Digite seu melhor endereço de email',
-              hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
-              prefixIcon: const Icon(Icons.email_outlined, color: Colors.white),
-              filled: true,
-              fillColor: Colors.white.withValues(alpha: 0.2),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
+
+          // === DESCRIÇÃO ===
+          Text(
+            'Cadastre seu email, receba novidades e descontos imperdíveis antes de todo mundo!',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.poppins(
+              fontSize: 16, 
+              fontWeight: FontWeight.w400,
+              color: AppColors.primaryDark,
+              height: 1.2,
             ),
           ),
-          const SizedBox(height: 12),
+
+          // === INPUT EMAIL ===
           SizedBox(
-            width: double.infinity,
+            width: 312, 
+            height: 56, 
+            child: TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontSize: 13, 
+                color: AppColors.primaryDark, 
+              ),
+              decoration: InputDecoration(
+                hintText: 'Digite seu melhor endereço de email',
+                hintStyle: GoogleFonts.poppins(
+                  fontSize: 11, // 
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.primaryDark,
+                ),
+                filled: true,
+                fillColor: Color(0xFF8FFF24),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 24, 
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(32), 
+                  borderSide: const BorderSide(
+                    color: AppColors.primaryDark, 
+                    width: 2, 
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(32),
+                  borderSide: const BorderSide(
+                    color: AppColors.primaryDark,
+                    width: 2,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(32),
+                  borderSide: const BorderSide(
+                    color: AppColors.primaryDark,
+                    width: 2,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // === BOTÃO INSCREVER ===
+          SizedBox(
+            width: 145, 
+            height: 56, 
             child: ElevatedButton(
               onPressed: _handleSubscribe,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: const Color(0xFF213366),
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                backgroundColor: AppColors.primary, 
+                foregroundColor: AppColors.textLight,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24, 
+                  vertical: 16, 
                 ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32), 
+                ),
+                elevation: 0,
               ),
-              child: const Text(
-                'Inscreva-se para ganhar descontos!',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+              child: Text(
+                'Inscrever',
+                style: GoogleFonts.poppins(
+                  fontSize: 15, 
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.textLight, 
+                  height: 1.2,
                 ),
               ),
             ),
@@ -94,7 +139,6 @@ class _NewsletterSectionState extends State<NewsletterSection> {
       );
       return;
     }
-
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Inscrição realizada com sucesso!'),

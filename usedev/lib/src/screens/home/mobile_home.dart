@@ -9,7 +9,6 @@ import 'package:usedev/src/widgets/home/category_section.dart';
 import 'package:usedev/src/widgets/home/category_grid.dart';
 import 'package:usedev/src/widgets/home/promo_section.dart';
 import 'package:usedev/src/widgets/home/product_highlight_grid.dart';
-import 'package:usedev/src/widgets/home/see_more_button.dart';
 import 'package:usedev/src/widgets/home/newsletter_section.dart';
 import 'package:usedev/src/widgets/home/footer_section.dart';
 
@@ -33,7 +32,7 @@ class _MobileHomeState extends State<MobileHome> {
           SliverAppBar(
             pinned: true,
             automaticallyImplyLeading: false,
-            toolbarHeight: 150,
+            toolbarHeight: 149,
             backgroundColor: Color(0xFFFFFFFF),
             flexibleSpace: CustomHeader(
               onMenuTap: () => _scaffoldKey.currentState?.openDrawer(),
@@ -47,7 +46,7 @@ class _MobileHomeState extends State<MobileHome> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                sin(  DateTime.now().millisecondsSinceEpoch / 500) > 0
+                sin(  DateTime.now().millisecondsSinceEpoch / 5000) > 0
                     ? const SizedBox(height: 15)
                     : const SizedBox.shrink(),
                  Center(
@@ -81,11 +80,6 @@ class _MobileHomeState extends State<MobileHome> {
                       '/product',
                       arguments: product.id,
                     );
-                  },
-                ),
-                SeeMoreButton(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/products');
                   },
                 ),
                 const NewsletterSection(),

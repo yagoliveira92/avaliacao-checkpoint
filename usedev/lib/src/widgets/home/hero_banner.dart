@@ -11,7 +11,6 @@ class HeroBanner extends StatefulWidget {
 
 class _HeroBannerState extends State<HeroBanner> {
   final PageController _pageController = PageController();
-  //int _currentPage = 0;
 
   @override
   void dispose() {
@@ -30,7 +29,7 @@ class _HeroBannerState extends State<HeroBanner> {
           // Área principal do Hero
           Stack(
             children: [
-              // Imagem principal (pessoa com camiseta)
+              // Imagem principal (banner)
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: SizedBox(
@@ -63,7 +62,7 @@ class _HeroBannerState extends State<HeroBanner> {
                 ),
               ),
 
-              // Texto "Hora de abraçar seu lado geek!" - conforme Figma
+              // Texto "Hora de abraçar seu lado geek!"
               Positioned(
                 bottom: 130,
                 left: 0,

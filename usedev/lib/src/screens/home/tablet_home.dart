@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:usedev/src/data/mock_categories.dart';
 import 'package:usedev/src/data/mock_products.dart';
-import 'package:usedev/src/widgets/common/search_bar.dart';
 import 'package:usedev/src/widgets/home/custom_header.dart';
 import 'package:usedev/src/widgets/home/hero_banner.dart';
 import 'package:usedev/src/widgets/home/category_section.dart';
 import 'package:usedev/src/widgets/home/category_grid.dart';
 import 'package:usedev/src/widgets/home/promo_section.dart';
 import 'package:usedev/src/widgets/home/product_highlight_grid.dart';
-import 'package:usedev/src/widgets/home/see_more_button.dart';
 import 'package:usedev/src/widgets/home/newsletter_section.dart';
 import 'package:usedev/src/widgets/home/footer_section.dart';
 
@@ -68,11 +66,6 @@ class _TabletHomeState extends State<TabletHome> {
                       '/product',
                       arguments: product.id,
                     );
-                  },
-                ),
-                SeeMoreButton(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/products');
                   },
                 ),
                 const NewsletterSection(),

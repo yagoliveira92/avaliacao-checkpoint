@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:usedev/src/core/theme/colors.dart';
 
 class FooterSection extends StatelessWidget {
@@ -6,73 +7,205 @@ class FooterSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        children: [
-          const Text(
-            'Siga nossas redes:',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF213366),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      children: [
+        // === CONTAINER ESCURO ===
+        Container(
+          width: double.infinity,
+          color: AppColors.primaryDark,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+          child: Column(
+            spacing: 32,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _SocialIcon(icon: Icons.facebook, onTap: () {}),
-              const SizedBox(width: 24),
-              _SocialIcon(icon: Icons.camera, onTap: () {}),
-              const SizedBox(width: 24),
-              _SocialIcon(icon: Icons.youtube_searched_for, onTap: () {}),
-              const SizedBox(width: 24),
-              _SocialIcon(icon: Icons.public, onTap: () {}),
+              // === Logo + Descrição + Separador ===
+              Column(
+                spacing: 30,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logo/PNG/Logo_UseDev_Verde.png',
+                    width: 80,
+                    height: 48,
+                    fit: BoxFit.contain,
+                  ),
+                  Text(
+                    'Hora de abraçar seu lado geek!',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.accentGreen,
+                      height: 1.2,
+                    ),
+                  ),
+                  Container(
+                    width: 280,
+                    height: 1.5,
+                    color: AppColors.accentGreen,
+                  ),
+                ],
+              ),
+
+              // === Links/informações ===
+              Column(
+                spacing: 30,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _FooterLinks(
+                    title: 'Funcionamento',
+                    items: const [
+                      'Segunda a Sexta - 8h às 18h',
+                      'sac@usedev.com.br',
+                      '0800 541 320',
+                    ],
+                  ),
+                  _FooterLinks(
+                    title: 'Institucional',
+                    items: const [
+                      'Sobre nós',
+                      'Contato',
+                      'Política de Privacidade',
+                      'LGPD - Lei de proteção de dados',
+                    ],
+                  ),
+                  _FooterLinks(
+                    title: 'Informações',
+                    items: const [
+                      'Entregas',
+                      'Garantia',
+                      'Trocas e devoluções',
+                    ],
+                  ),
+                ],
+              ),
+
+              // === Formas de Pagamento ===
+              Column(
+                spacing: 16,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Formas de Pagamento',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.backgroundLight,
+                      height: 1.2,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 8,
+                    children: [
+                      Image.asset('assets/icons/ico-cartao-visa.png', width: 37, height: 24),
+                      Image.asset('assets/icons/ico-cartao-master.png', width: 37, height: 24),
+                      Image.asset('assets/icons/ico-cartao-elo.png', width: 37, height: 24),
+                      Image.asset('assets/icons/ico-cartao-diners.png', width: 37, height: 24),
+                      Image.asset('assets/icons/ico-pix.png', width: 37, height: 24),
+                    ],
+                  ),
+                ],
+              ),
+
+              // === Siga nossas redes ===
+              Column(
+                spacing: 16,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Siga nossas redes:',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.backgroundLight,
+                      height: 1.2,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 8,
+                    children: [
+                      Image.asset('assets/icons/Whatsapp.png', width: 32, height: 32),
+                      Image.asset('assets/icons/Instagram.png', width: 32, height: 32),
+                      Image.asset('assets/icons/Tiktok.png', width: 32, height: 32),
+                    ],
+                  ),
+                ],
+              )
             ],
           ),
-          const SizedBox(height: 24),
-          const Divider(),
-          const SizedBox(height: 16),
-          Text(
+        ),
+
+        // === FUNDO BRANCO ===
+        Container(
+          width: double.infinity,
+          color: AppColors.backgroundWhite,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+          child: Text(
             'Desenvolvido por Alura. Projeto fictício sem fins comerciais.',
-            style: TextStyle(
-              fontSize: 12,
-              color: AppColors.textSecondary,
-            ),
             textAlign: TextAlign.center,
+            style: GoogleFonts.poppins(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColors.primaryDark,
+              height: 1.2,
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
-class _SocialIcon extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onTap;
+// Alinhar classe abaixo à esquerda, com largura de 240 e espaçamento entre itens conforme Figma
+class _FooterLinks extends StatelessWidget {
+  final String title;
+  final List<String> items;
 
-  const _SocialIcon({
-    required this.icon,
-    required this.onTap,
+  const _FooterLinks({
+    required this.title,
+    required this.items,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Colors.grey[100],
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          icon,
-          color: const Color(0xFF213366),
-          size: 24,
-        ),
+    return SizedBox(
+      width: 240, 
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start, 
+        children: [
+          Text(
+            title,
+            textAlign: TextAlign.left,
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: AppColors.backgroundLight,
+              height: 1.2,
+            ),
+          ),
+
+          const SizedBox(height: 16), // gap título → itens
+
+          ...items.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(bottom: 8), // gap entre itens
+              child: Text(
+                item,
+                textAlign: TextAlign.left,
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.backgroundLight,
+                  height: 1.2,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

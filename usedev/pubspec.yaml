@@ -37,6 +37,7 @@ dependencies:
   provider: ^6.1.2  # Para gerenciamento de estado
   flutter_svg: ^2.0.10+1  # Para imagens SVG
   google_fonts: ^6.2.1  # Para fontes personalizadas
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,10 @@ flutter:
    - assets/images/Cards_produtos/Cards_Home/Mobile/Imagem_produto_Capy_Mobile.png
    - assets/images/Cards_produtos/Cards_Home/Mobile/Imagem_produto_Mousepad_Mobile.png
    - assets/images/Cards_produtos/Cards_Home/Mobile/Imagem_produto_Caneca_bug_Mobile.png
+   - assets/logo/PNG/Logo_UseDev_Verde.png
+   - assets/icons/Whatsapp.png
+   - assets/icons/Instagram.png
+   - assets/icons/Tiktok.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
