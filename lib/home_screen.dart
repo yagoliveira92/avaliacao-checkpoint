@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'product_screen.dart';
+import 'cart_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -43,17 +44,17 @@ class CustomNavbar extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth >= 1024) {
-          return _buildDesktopNavbar();
+          return _buildDesktopNavbar(context);
         } else if (constraints.maxWidth >= 600) {
-          return _buildTabletNavbar();
+          return _buildTabletNavbar(context);
         } else {
-          return _buildMobileNavbar();
+          return _buildMobileNavbar(context);
         }
       },
     );
   }
 
-  Widget _buildMobileNavbar() {
+  Widget _buildMobileNavbar(BuildContext context) {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
@@ -70,10 +71,15 @@ class CustomNavbar extends StatelessWidget {
                 fit: BoxFit.contain,
               ),
               Row(
-                children: const [
-                  Icon(Icons.person_outline, color: Color(0xFF090129), size: 28),
-                  SizedBox(width: 12),
-                  Icon(Icons.shopping_cart_outlined, color: Color(0xFF090129), size: 28),
+                children: [
+                  const Icon(Icons.person_outline, color: Color(0xFF090129), size: 28),
+                  const SizedBox(width: 12),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen()));
+                    },
+                    icon: const Icon(Icons.shopping_cart_outlined, color: Color(0xFF090129), size: 28),
+                  ),
                 ],
               ),
             ],
@@ -109,7 +115,7 @@ class CustomNavbar extends StatelessWidget {
     );
   }
 
-  Widget _buildTabletNavbar() {
+  Widget _buildTabletNavbar(BuildContext context) {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -156,10 +162,15 @@ class CustomNavbar extends StatelessWidget {
             style: GoogleFonts.poppins(fontSize: 16, color: const Color(0xFF090129)),
           ),
           Row(
-            children: const [
-              Icon(Icons.person_outline, color: Color(0xFF090129), size: 28),
-              SizedBox(width: 12),
-              Icon(Icons.shopping_cart_outlined, color: Color(0xFF090129), size: 28),
+            children: [
+              const Icon(Icons.person_outline, color: Color(0xFF090129), size: 28),
+              const SizedBox(width: 12),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen()));
+                },
+                icon: const Icon(Icons.shopping_cart_outlined, color: Color(0xFF090129), size: 28),
+              ),
             ],
           ),
         ],
@@ -167,7 +178,7 @@ class CustomNavbar extends StatelessWidget {
     );
   }
 
-  Widget _buildDesktopNavbar() {
+  Widget _buildDesktopNavbar(BuildContext context) {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
@@ -218,7 +229,12 @@ class CustomNavbar extends StatelessWidget {
           const SizedBox(width: 30),
           const Icon(Icons.person_outline, color: Color(0xFF090129), size: 28),
           const SizedBox(width: 15),
-          const Icon(Icons.shopping_cart_outlined, color: Color(0xFF090129), size: 28),
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen()));
+            },
+            icon: const Icon(Icons.shopping_cart_outlined, color: Color(0xFF090129), size: 28),
+          ),
         ],
       ),
     );
