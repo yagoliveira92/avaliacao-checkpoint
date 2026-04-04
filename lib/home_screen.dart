@@ -1,691 +1,1124 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class UseDevColors {
-  static const background = Color(0xFF12122A);
-  static const navyDark = Color(0xFF0E0E2A);
-  static const navy = Color(0xFF1A1A3E);
-  static const pink = Color(0xFFFF3EA5);
-  static const green = Color(0xFF39FF14);
-  static const purple = Color(0xFF7B2FBE);
-  static const purpleLight = Color(0xFFAB5CE8);
-  static const white = Color(0xFFFFFFFF);
-  static const lightGray = Color(0xFFF5F5F5);
-  static const darkGray = Color(0xFF888888);
-  static const cardBg = Color(0xFFF8F8F8);
-  static const footerBg = Color(0xFF12122A);
-}
-
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _searchController = TextEditingController();
-  int _cartCount = 0;
-
-  final List<Map<String, dynamic>> _categories = [
-    {'label': 'Roupas', 'image': 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80'},
-    {'label': 'Decoração', 'image': 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&q=80'},
-    {'label': 'Canecas', 'image': 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600&q=80'},
-    {'label': 'Acessórios', 'image': 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&q=80'},
-  ];
-
-  final List<Map<String, dynamic>> _promos = [
-    {'name': 'Camiseta Capy', 'price': '28,00', 'image': 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80'},
-    {'name': 'Mousepad Café', 'price': '18,00', 'image': 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80'},
-    {'name': 'Caneca Bug', 'price': '28,00', 'image': 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80'},
-    {'name': 'Boné 404', 'price': '25,00', 'image': 'https://images.unsplash.com/photo-1534215754734-18e55d13e346?w=400&q=80'},
-    {'name': 'Quadro While', 'price': '22,00', 'image': 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80'},
-    {'name': 'Copo Vida de Dev', 'price': '28,00', 'image': 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80'},
-    {'name': 'Abridor de garrafa', 'price': '12,00', 'image': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'},
-    {'name': 'Camiseta Estágios', 'price': '35,00', 'image': 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&q=80'},
-  ];
-
-  @override
   Widget build(BuildContext context) {
-    final w = MediaQuery.of(context).size.width;
-    final isMobile = w < 600;
-    final isTablet = w >= 600 && w < 900;
-
     return Scaffold(
-      backgroundColor: UseDevColors.lightGray,
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildNavBar(isMobile),
-            _buildHeroBanner(isMobile),
-            _buildCategoriesSection(isMobile, isTablet),
-            _buildPromosSection(isMobile, isTablet),
-            _buildNewsletterBanner(isMobile),
-            _buildFooter(isMobile, isTablet),
-            _buildBottomBar(),
+            const CustomNavbar(),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth >= 1024) {
+                  return const HeroSectionDesktop();
+                } else if (constraints.maxWidth >= 600) {
+                  return const HeroSectionTablet();
+                } else {
+                  return const HeroSectionMobile();
+                }
+              },
+            ),
+            const CategoriesSection(),
+            const PromosSection(),
+            NewsletterSection(),
+            FooterSection(),
           ],
         ),
       ),
     );
   }
-
-  Widget _buildNavBar(bool isMobile) {
-    return Container(
-      color: UseDevColors.white,
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 80, vertical: 20),
-      child: isMobile ? _buildMobileNav() : _buildDesktopNav(),
-    );
-  }
-
-Widget _buildDesktopNav() {
-  return Row(
-    children: [
-      Image.asset('assets/Logo e favicon/PNG/Logo UseDev.png', height: 40),
-      const SizedBox(width: 32),
-      Text('Sobre nós', style: GoogleFonts.poppins(fontSize: 15, color: UseDevColors.navyDark)),
-      const SizedBox(width: 24),
-Expanded(
-  child: Container(
-    height: 52,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(32),
-      border: Border.all(color: const Color(0xFFD0D0D0), width: 1),    ),
-    child: TextField(
-      controller: _searchController,
-      decoration: InputDecoration(
-        hintText: 'O que você procura?',
-        hintStyle: GoogleFonts.poppins(fontSize: 14, color: UseDevColors.darkGray),
-        suffixIcon: const Icon(Icons.search, color: UseDevColors.darkGray, size: 22),
-        border: InputBorder.none,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      ),
-    ),
-  ),
-),
-      const SizedBox(width: 24),
-      Text('Login', style: GoogleFonts.poppins(fontSize: 15, color: UseDevColors.navyDark)),
-      const SizedBox(width: 20),
-      const Icon(Icons.person_outline_rounded, color: UseDevColors.navyDark, size: 26),
-      const SizedBox(width: 16),
-      Stack(
-        children: [
-          const Icon(Icons.shopping_cart_outlined, color: UseDevColors.navyDark, size: 26),
-          if (_cartCount > 0)
-            Positioned(
-              right: 0,
-              top: 0,
-              child: Container(
-                width: 14,
-                height: 14,
-                decoration: const BoxDecoration(color: UseDevColors.pink, shape: BoxShape.circle),
-                child: Center(child: Text('$_cartCount', style: const TextStyle(color: Colors.white, fontSize: 8))),
-              ),
-            ),
-        ],
-      ),
-    ],
-  );
 }
 
-  Widget _buildMobileNav() {
-    return Row(
-      children: [
-        const _UseDevLogo(),
-        const Spacer(),
-        const Icon(Icons.search, color: UseDevColors.navyDark, size: 24),
-        const SizedBox(width: 12),
-        const Icon(Icons.person_outline_rounded, color: UseDevColors.navyDark, size: 24),
-        const SizedBox(width: 12),
-        const Icon(Icons.shopping_cart_outlined, color: UseDevColors.navyDark, size: 24),
-      ],
+class CustomNavbar extends StatelessWidget {
+  const CustomNavbar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth >= 1024) {
+          return _buildDesktopNavbar();
+        } else if (constraints.maxWidth >= 600) {
+          return _buildTabletNavbar();
+        } else {
+          return _buildMobileNavbar();
+        }
+      },
     );
   }
 
-  Widget _buildHeroBanner(bool isMobile) {
+  Widget _buildMobileNavbar() {
     return Container(
-      height: isMobile ? 320 : 420,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF12122A), Color(0xFF1A1A4E)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      child: Stack(
+      color: Colors.white,
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          CustomPaint(size: Size.infinite, painter: _GridPainter()),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                flex: isMobile ? 5 : 4,
-                child: SizedBox.expand(
-                  child: Image.network(
-                    'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&q=80',
-                    fit: BoxFit.cover,
-                    color: const Color(0xFF1A1A4E).withOpacity(0.15),
-                    colorBlendMode: BlendMode.darken,
-                    errorBuilder: (_, __, ___) => Container(
-                      color: const Color(0xFF1E1E50),
-                      child: const Icon(Icons.image_not_supported, color: Colors.white24, size: 60),
+              const Icon(Icons.menu, color: Color(0xFF090129), size: 28),
+              Image.asset(
+                'assets/Logo e favicon/PNG/Logo UseDev.png',
+                height: 40,
+                fit: BoxFit.contain,
+              ),
+              Row(
+                children: const [
+                  Icon(Icons.person_outline, color: Color(0xFF090129), size: 28),
+                  SizedBox(width: 12),
+                  Icon(Icons.shopping_cart_outlined, color: Color(0xFF090129), size: 28),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Container(
+            height: 54,
+            decoration: BoxDecoration(
+              color: const Color(0xFFEFEFEF),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'O que você procura?',
+                      hintStyle: GoogleFonts.poppins(
+                        color: const Color(0xFF090129),
+                        fontSize: 16,
+                      ),
+                      border: InputBorder.none,
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: isMobile ? 5 : 5,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 48, vertical: 32),
+                const Icon(Icons.search, color: Color(0xFF090129), size: 24),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabletNavbar() {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset(
+            'assets/Logo e favicon/PNG/Logo UseDev.png',
+            height: 40,
+            fit: BoxFit.contain,
+          ),
+          Text(
+            'Sobre nós',
+            style: GoogleFonts.poppins(fontSize: 16, color: const Color(0xFF090129)),
+          ),
+          Container(
+            width: 300,
+            height: 48,
+            decoration: BoxDecoration(
+              color: const Color(0xFFEFEFEF),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'O que você procura?',
+                      hintStyle: GoogleFonts.poppins(
+                        color: const Color(0xFF090129),
+                        fontSize: 14,
+                      ),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+                const Icon(Icons.search, color: Color(0xFF090129), size: 20),
+              ],
+            ),
+          ),
+          Text(
+            'Login',
+            style: GoogleFonts.poppins(fontSize: 16, color: const Color(0xFF090129)),
+          ),
+          Row(
+            children: const [
+              Icon(Icons.person_outline, color: Color(0xFF090129), size: 28),
+              SizedBox(width: 12),
+              Icon(Icons.shopping_cart_outlined, color: Color(0xFF090129), size: 28),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDesktopNavbar() {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+      child: Row(
+        children: [
+          Image.asset(
+            'assets/Logo e favicon/PNG/Logo UseDev.png',
+            height: 40,
+            fit: BoxFit.contain,
+          ),
+          const Spacer(flex: 2),
+          Text(
+            'Sobre nós',
+            style: GoogleFonts.poppins(fontSize: 16, color: const Color(0xFF090129)),
+          ),
+          const Spacer(flex: 3),
+          Container(
+            width: 450,
+            height: 54,
+            decoration: BoxDecoration(
+              color: const Color(0xFFEFEFEF),
+              borderRadius: BorderRadius.circular(27),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'O que você procura?',
+                      hintStyle: GoogleFonts.poppins(
+                        color: const Color(0xFF090129),
+                        fontSize: 16,
+                      ),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+                const Icon(Icons.search, color: Color(0xFF090129), size: 24),
+              ],
+            ),
+          ),
+          const Spacer(flex: 3),
+          Text(
+            'Login',
+            style: GoogleFonts.poppins(fontSize: 16, color: const Color(0xFF090129)),
+          ),
+          const SizedBox(width: 30),
+          const Icon(Icons.person_outline, color: Color(0xFF090129), size: 28),
+          const SizedBox(width: 15),
+          const Icon(Icons.shopping_cart_outlined, color: Color(0xFF090129), size: 28),
+        ],
+      ),
+    );
+  }
+}
+
+class HeroSectionMobile extends StatelessWidget {
+  const HeroSectionMobile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFF090129),
+      child: Stack(
+        children: [
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              'assets/Imagens/Banner seções Mobile.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25), 
+            child: Column(
+              children: [
+                const SizedBox(height: 40),
+                SizedBox(
+                  width: double.infinity,
+                  height: 350,
+                  child: Image.asset(
+                    'assets/Imagens/Imagem Hero Mobile.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: GoogleFonts.orbitron(
+                      fontSize: 48,
+                      fontWeight: FontWeight.w900,
+                      height: 1.1,
+                      color: const Color(0xFFFF55DF),
+                    ),
+                    children: [
+                      const TextSpan(text: 'Hora de\nabraçar\nseu '),
+                      TextSpan(
+                        text: 'lado\ngeek!',
+                        style: TextStyle(
+                          color: const Color(0xFF8FFF24),
+                          shadows: [
+                            Shadow(
+                              blurRadius: 15,
+                              color: const Color(0xFF8FFF24).withOpacity(0.8),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 30),
+                SizedBox(
+                  width: double.infinity, 
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF780BF7),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35),
+                      ),
+                    ),
+                    child: Text(
+                      'Ver as novidades!',
+                      style: GoogleFonts.poppins(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 60),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HeroSectionTablet extends StatelessWidget {
+  const HeroSectionTablet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFF090129),
+      child: Stack(
+        children: [
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              'assets/Imagens/Banner seções tablet.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 60),
+            child: Column(
+              children: [
+                const SizedBox(height: 50),
+                SizedBox(
+                  height: 500,
+                  child: Image.asset(
+                    'assets/Imagens/Imagem Hero.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: GoogleFonts.orbitron(
+                      fontSize: 64,
+                      fontWeight: FontWeight.w900,
+                      height: 1.1,
+                      color: const Color(0xFFFF55DF),
+                    ),
+                    children: [
+                      const TextSpan(text: 'Hora de abraçar seu '),
+                      TextSpan(
+                        text: 'lado geek!',
+                        style: TextStyle(
+                          color: const Color(0xFF8FFF24),
+                          shadows: [
+                            Shadow(
+                              blurRadius: 20,
+                              color: const Color(0xFF8FFF24).withOpacity(0.8),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF780BF7),
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                  ),
+                  child: Text(
+                    'Ver as novidades!',
+                    style: GoogleFonts.poppins(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 80),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HeroSectionDesktop extends StatelessWidget {
+  const HeroSectionDesktop({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 700,
+      color: const Color(0xFF090129),
+      child: Stack(
+        children: [
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              'assets/Imagens/Banner seções.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 100),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Image.asset(
+                    'assets/Imagens/Imagem Hero.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                const SizedBox(width: 50),
+                Expanded(
+                  flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       RichText(
                         text: TextSpan(
+                          style: GoogleFonts.orbitron(
+                            fontSize: 72,
+                            fontWeight: FontWeight.w900,
+                            height: 1.1,
+                            color: const Color(0xFFFF55DF),
+                          ),
                           children: [
-                            TextSpan(
-                              text: 'Hora de\nabraçar seu\n',
-                              style: GoogleFonts.orbitron(
-                                fontSize: isMobile ? 20 : 34,
-                                fontWeight: FontWeight.bold,
-                                color: UseDevColors.pink,
-                                height: 1.25,
-                              ),
-                            ),
+                            const TextSpan(text: 'Hora de\nabraçar seu\n'),
                             TextSpan(
                               text: 'lado geek!',
-                              style: GoogleFonts.orbitron(
-                                fontSize: isMobile ? 20 : 34,
-                                fontWeight: FontWeight.bold,
-                                color: UseDevColors.green,
-                                height: 1.25,
+                              style: TextStyle(
+                                color: const Color(0xFF8FFF24),
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 25,
+                                    color: const Color(0xFF8FFF24).withOpacity(0.8),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 28),
+                      const SizedBox(height: 40),
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: UseDevColors.purple,
-                          foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 28, vertical: 14),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                          elevation: 0,
+                          backgroundColor: const Color(0xFF780BF7),
+                          padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 25),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
                         ),
                         child: Text(
                           'Ver as novidades!',
-                          style: GoogleFonts.poppins(fontSize: isMobile ? 13 : 15, fontWeight: FontWeight.w600),
+                          style: GoogleFonts.poppins(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildCategoriesSection(bool isMobile, bool isTablet) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 40, vertical: 48),
-      child: Column(
-        children: [
-          Text(
-            'Categorias',
-            style: GoogleFonts.orbitron(fontSize: isMobile ? 24 : 32, fontWeight: FontWeight.bold, color: UseDevColors.purple),
+class CategoriesSection extends StatelessWidget {
+  const CategoriesSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        bool isMobile = constraints.maxWidth < 600;
+        bool isTablet = constraints.maxWidth >= 600 && constraints.maxWidth < 1024;
+        String deviceFolder = isMobile ? 'Mobile' : (isTablet ? 'Tablet' : 'Desktop');
+
+        return Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : (isTablet ? 40 : 80),
+            vertical: 40,
           ),
-          const SizedBox(height: 12),
-          Text(
-            'De roupas a gadgets tecnológicos temos tudo para atender suas paixões e hobbies com estilo e autenticidade.',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(fontSize: isMobile ? 13 : 15, color: UseDevColors.navyDark),
-          ),
-          const SizedBox(height: 32),
-          Column(
+          child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(child: _buildCategoryCard(_categories[0])),
-                  const SizedBox(width: 4),
-                  Expanded(child: _buildCategoryCard(_categories[1])),
-                ],
+              Text(
+                'Categorias',
+                style: GoogleFonts.orbitron(
+                  fontSize: isMobile ? 24 : 32,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF090129),
+                ),
               ),
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  Expanded(child: _buildCategoryCard(_categories[2])),
-                  const SizedBox(width: 4),
-                  Expanded(child: _buildCategoryCard(_categories[3])),
-                ],
+              const SizedBox(height: 10),
+              Text(
+                'De roupas a gadgets tecnológicos temos tudo para atender suas paixões e hobbies com estilo e autenticidade.',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: isMobile ? 14 : 16,
+                  color: const Color(0xFF090129).withOpacity(0.7),
+                ),
               ),
+              const SizedBox(height: 40),
+              if (isMobile)
+                Column(
+                  children: [
+                    _buildCategoryCard('Roupas', 'Categorias - Roupas.png', deviceFolder, 1.5),
+                    const SizedBox(height: 20),
+                    _buildCategoryCard('Decoração', 'Categoria Decoração.png', deviceFolder, 1.5),
+                    const SizedBox(height: 20),
+                    _buildCategoryCard('Canecas', 'Categoria Canecas.png', deviceFolder, 1.5),
+                    const SizedBox(height: 20),
+                    _buildCategoryCard('Acessórios', 'Categoria Acessórios.png', deviceFolder, 1.5),
+                  ],
+                )
+              else
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 2, 
+                          child: _buildCategoryCard('Roupas', 'Categorias - Roupas.png', deviceFolder, 2.5),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          flex: 1, 
+                          child: _buildCategoryCard('Decoração', 'Categoria Decoração.png', deviceFolder, 1.25),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1, 
+                          child: _buildCategoryCard('Canecas', 'Categoria Canecas.png', deviceFolder, 1.25),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          flex: 2, 
+                          child: _buildCategoryCard('Acessórios', 'Categoria Acessórios.png', deviceFolder, 2.5),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
             ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildCategoryCard(String name, String fileName, String folder, double imageAspect) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AspectRatio(
+            aspectRatio: imageAspect,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Color(0xFF090129),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                child: Image.asset(
+                  'assets/Imagens/Categorias/$folder/$fileName',
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Text(
+              name,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.orbitron(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFF090129),
+              ),
+            ),
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildCategoryCard(Map<String, dynamic> cat) {
-    return GestureDetector(
-      onTap: () {},
-      child: SizedBox(
-        height: 220,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Image.network(
-              cat['image'] as String,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(color: UseDevColors.navy),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.3)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+class PromosSection extends StatelessWidget {
+  const PromosSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double width = constraints.maxWidth;
+        bool isMobile = width < 600;
+        bool isTablet = width >= 600 && width < 1024;
+        
+        String deviceFolder = isMobile ? 'Mobile' : 'Desktop e Tablet';
+        
+        final List<Map<String, String>> products = isMobile 
+          ? [
+              {'name': 'Camiseta Capy', 'price': '28,00', 'file': 'Imagem produto Capy Mobile.png'},
+              {'name': 'Mousepad Café', 'price': '18,00', 'file': 'Imagem produto Mousepad Mobile.png'},
+              {'name': 'Caneca Bug', 'price': '28,00', 'file': 'Imagem produto Caneca Bug Mobile.png'},
+              {'name': 'Boné 404', 'price': '25,00', 'file': 'Imagem produto Boné 404 Mobile.png'},
+              {'name': 'Quadro While', 'price': '22,00', 'file': 'Imagem produto Quadro Mobile.png'},
+              {'name': 'Copo Vida de Dev', 'price': '28,00', 'file': 'Imagem produto Copo Mobile.png'},
+              {'name': 'Abridor de garrafa', 'price': '12,00', 'file': 'Imagem produto Abridor Mobile.png'},
+              {'name': 'Camiseta Estágios', 'price': '35,00', 'file': 'Imagem produto Camiseta Mobile.png'}, 
+            ]
+          : [
+              {'name': 'Camiseta Capy', 'price': '28,00', 'file': 'Card Produto Camiseta.png'}, 
+              {'name': 'Mousepad Café', 'price': '18,00', 'file': 'Card Produto Mousepad.png'},
+              {'name': 'Caneca Bug', 'price': '28,00', 'file': 'Card Produto Caneca Bug.png'},
+              {'name': 'Boné 404', 'price': '25,00', 'file': 'Card Produto Boné 404.png'},
+              {'name': 'Quadro While', 'price': '22,00', 'file': 'Card Produto Quadro.png'},
+              {'name': 'Copo Vida de Dev', 'price': '28,00', 'file': 'Card Produto Copo.png'},
+              {'name': 'Abridor de garrafa', 'price': '12,00', 'file': 'Card Produto Abridor.png'},
+              {'name': 'Camiseta Estágios', 'price': '35,00', 'file': 'Card Produto Camiseta.png'}, 
+            ];
+
+        int crossAxisCount = isMobile ? 1 : (isTablet ? 2 : 4);
+        double horizontalPadding = isMobile ? 20 : (isTablet ? 40 : 80);
+        double aspectRatio = isMobile ? 0.9 : 0.85;
+
+        return Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 60),
+          child: Column(
+            children: [
+              Text(
+                'Promos especiais',
+                style: GoogleFonts.orbitron(
+                  fontSize: isMobile ? 24 : 32,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF090129),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: double.infinity,
-                color: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Text(
-                  cat['label'] as String,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.orbitron(fontSize: 16, fontWeight: FontWeight.bold, color: UseDevColors.navyDark),
+              const SizedBox(height: 40),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: aspectRatio,
+                ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return _buildProductCard(
+                    products[index]['name']!,
+                    products[index]['price']!,
+                    products[index]['file']!,
+                    deviceFolder,
+                  );
+                },
+              ),
+              const SizedBox(height: 40),
+              Align(
+                alignment: isMobile ? Alignment.center : Alignment.bottomRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Ver mais',
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFF9D4EDD),
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildPromosSection(bool isMobile, bool isTablet) {
-    final crossAxisCount = isMobile ? 2 : (isTablet ? 3 : 4);
-
+  Widget _buildProductCard(String name, String price, String imageName, String folder) {
     return Container(
-      color: Colors.white,
-      padding: EdgeInsets.fromLTRB(isMobile ? 16 : 40, 8, isMobile ? 16 : 40, 24),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(4),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Promos especiais',
-            style: GoogleFonts.orbitron(fontSize: isMobile ? 20 : 26, fontWeight: FontWeight.bold, color: UseDevColors.navyDark),
-          ),
-          const SizedBox(height: 20),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              childAspectRatio: 0.75,
-            ),
-            itemCount: _promos.length,
-            itemBuilder: (context, i) => _buildPromoCard(_promos[i]),
-          ),
-          const SizedBox(height: 16),
-          Align(
-            alignment: Alignment.centerRight,
-            child: GestureDetector(
-              onTap: () {},
-              child: Text(
-                'Ver mais',
-                style: GoogleFonts.poppins(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: UseDevColors.purple,
-                  decoration: TextDecoration.underline,
-                  decorationColor: UseDevColors.purple,
-                ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: double.infinity,
+              child: Image.asset(
+                'assets/Imagens/Cards produtos/Cards Home/$folder/$imageName',
+                fit: BoxFit.contain,
               ),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Color(0xFFF1F1F1),
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(4)),
+            ),
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: GoogleFonts.orbitron(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF090129),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  price,
+                  style: GoogleFonts.orbitron(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF090129),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildPromoCard(Map<String, dynamic> product) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(color: Colors.white, border: Border.all(color: const Color(0xFFEEEEEE))),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                color: UseDevColors.lightGray,
-                child: Image.network(
-                  product['image'] as String,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const Center(child: Icon(Icons.image_not_supported, color: Colors.black26)),
+class NewsletterSection extends StatelessWidget {
+  const NewsletterSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double width = constraints.maxWidth;
+        bool isMobile = width < 600;
+        bool isTablet = width >= 600 && width < 1024;
+        
+        double horizontalPadding = isMobile ? 25 : (isTablet ? 60 : 80);
+        double verticalPadding = (isMobile || isTablet) ? 60 : 80;
+
+        return Container(
+          color: const Color(0xFF80FF00),
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: horizontalPadding,
+            vertical: verticalPadding,
+          ),
+          child: Column(
+            children: [
+              Text(
+                'Inscreva-se para ganhar descontos!',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.orbitron(
+                  fontSize: isMobile ? 24 : (isTablet ? 28 : 36),
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF090129),
+                  height: 1.2,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product['name'] as String,
-                    style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w500, color: UseDevColors.navyDark),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    product['price'] as String,
-                    style: GoogleFonts.orbitron(fontSize: 14, fontWeight: FontWeight.bold, color: UseDevColors.navyDark),
-                  ),
-                ],
+              const SizedBox(height: 16),
+              Text(
+                'Cadastre seu email, receba novidades e descontos imperdíveis antes de todo mundo!',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: isMobile ? 14 : (isTablet ? 16 : 18),
+                  color: const Color(0xFF090129),
+                  height: 1.5,
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNewsletterBanner(bool isMobile) {
-    return Container(
-      color: UseDevColors.green,
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 80, vertical: 48),
-      child: Column(
-        children: [
-          Text(
-            'Inscreva-se para ganhar descontos!',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.orbitron(fontSize: isMobile ? 18 : 26, fontWeight: FontWeight.bold, color: UseDevColors.purple),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'Cadastre seu email, receba novidades e descontos imperdíveis antes de todo mundo!',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(fontSize: isMobile ? 13 : 15, color: UseDevColors.purple),
-          ),
-          const SizedBox(height: 24),
-          isMobile
-              ? Column(children: [
-                  _buildEmailField(),
-                  const SizedBox(height: 12),
-                  _buildSubscribeButton(fullWidth: true),
-                ])
-              : Row(
+              const SizedBox(height: 48),
+              if (isMobile || isTablet)
+                Column(
+                  children: [
+                    _buildInputField(double.infinity, isMobile, isTablet),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: isMobile ? 40 : 80),
+                      child: _buildButton(double.infinity, isMobile, isTablet),
+                    ),
+                  ],
+                )
+              else
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(width: 420, child: _buildEmailField()),
-                    const SizedBox(width: 12),
-                    _buildSubscribeButton(fullWidth: false),
+                    _buildInputField(500, false, false),
+                    const SizedBox(width: 16),
+                    _buildButton(null, false, false),
                   ],
                 ),
-        ],
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildEmailField() {
-    return Container(
-      height: 52,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(26),
-        border: Border.all(color: UseDevColors.purple.withOpacity(0.3)),
-      ),
+  Widget _buildInputField(double width, bool isMobile, bool isTablet) {
+    return SizedBox(
+      width: width,
+      height: (isMobile || isTablet) ? 54 : 60,
       child: TextField(
-        controller: _emailController,
+        textAlign: isMobile ? TextAlign.center : TextAlign.left,
+        style: GoogleFonts.poppins(
+          color: const Color(0xFF090129),
+          fontSize: (isMobile || isTablet) ? 14 : 16,
+        ),
         decoration: InputDecoration(
           hintText: 'Digite seu melhor endereço de email',
-          hintStyle: GoogleFonts.poppins(fontSize: 13, color: UseDevColors.darkGray),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          hintStyle: GoogleFonts.poppins(
+            color: const Color(0xFF090129).withOpacity(0.6),
+            fontSize: (isMobile || isTablet) ? 14 : 16,
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+          filled: false,
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black, width: 1.5),
+            borderRadius: BorderRadius.circular(40),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xFF7B2CBF), width: 2),
+            borderRadius: BorderRadius.circular(40),
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildSubscribeButton({required bool fullWidth}) {
-    return SizedBox(
-      width: fullWidth ? double.infinity : null,
-      height: 52,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: UseDevColors.purple,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-          padding: const EdgeInsets.symmetric(horizontal: 28),
-          elevation: 0,
-        ),
-        child: Text('Inscrever', style: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w600)),
-      ),
-    );
-  }
+  Widget _buildButton(double? width, bool isMobile, bool isTablet) {
+    double horizontalPadding = (isMobile || isTablet) ? 0 : 40;
 
-  Widget _buildFooter(bool isMobile, bool isTablet) {
     return Container(
-      color: UseDevColors.footerBg,
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 60, vertical: 48),
-      child: isMobile ? _buildMobileFooter() : _buildDesktopFooter(),
+      width: width,
+      height: (isMobile || isTablet) ? 54 : 60,
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      decoration: BoxDecoration(
+        color: const Color(0xFF7B2CBF),
+        borderRadius: BorderRadius.circular(40),
+      ),
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(40),
+        child: Center(
+          child: Text(
+            'Inscrever',
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: (isMobile || isTablet) ? 16 : 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
     );
   }
+}
 
-  Widget _buildDesktopFooter() {
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+class FooterSection extends StatelessWidget {
+  const FooterSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double width = constraints.maxWidth;
+        bool isMobile = width < 600;
+        bool isTablet = width >= 600 && width < 1100;
+
+        return Column(
           children: [
-            Expanded(
-              flex: 3,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _UseDevLogo(light: true),
-                  const SizedBox(height: 12),
-                  Text('Hora de abraçar seu lado geek!', style: GoogleFonts.poppins(color: UseDevColors.green, fontSize: 13)),
-                ],
+            Container(
+              width: double.infinity,
+              color: const Color(0xFF090129),
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? 25 : 50,
+                vertical: 60,
+              ),
+              child: _buildMainContent(isMobile, isTablet),
+            ),
+            Container(
+              width: double.infinity,
+              color: const Color(0xFFEEEEEE),
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: Text(
+                'Desenvolvido por Caio Reis. Projeto fictício sem fins comerciais.',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  color: const Color(0xFF090129),
+                ),
               ),
             ),
-            Expanded(flex: 2, child: _buildFooterColumn('Funcionamento', ['Segunda a Sexta - 8h às 18h', 'sac@usedev.com.br', '0800 541 320'])),
-            Expanded(flex: 2, child: _buildFooterColumn('Institucional', ['Sobre nós', 'Contato', 'Política de Privacidade', 'LGPD - Lei de proteção de dados'])),
-            Expanded(flex: 2, child: _buildFooterColumn('Informações', ['Entregas', 'Garantia', 'Trocas e devoluções'])),
           ],
-        ),
-        const SizedBox(height: 32),
-        Divider(color: Colors.white.withOpacity(0.1), height: 1),
-        const SizedBox(height: 24),
-        Row(
-          children: [
-            Text('Formas de Pagamento', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 13)),
-            const SizedBox(width: 16),
-            ..._buildPaymentIcons(),
-            const Spacer(),
-            Text('Siga nossas redes:', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 13)),
-            const SizedBox(width: 12),
-            ..._buildSocialIcons(),
-          ],
-        ),
-      ],
+        );
+      },
     );
   }
 
-  Widget _buildMobileFooter() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const _UseDevLogo(light: true),
-        const SizedBox(height: 8),
-        Text('Hora de abraçar seu lado geek!', style: GoogleFonts.poppins(color: UseDevColors.green, fontSize: 12)),
-        const SizedBox(height: 24),
-        _buildFooterColumn('Funcionamento', ['Segunda a Sexta - 8h às 18h', 'sac@usedev.com.br', '0800 541 320']),
-        const SizedBox(height: 20),
-        _buildFooterColumn('Institucional', ['Sobre nós', 'Contato', 'Política de Privacidade']),
-        const SizedBox(height: 20),
-        _buildFooterColumn('Informações', ['Entregas', 'Garantia', 'Trocas e devoluções']),
-        const SizedBox(height: 24),
-        Divider(color: Colors.white.withOpacity(0.1)),
-        const SizedBox(height: 16),
-        Text('Formas de Pagamento', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 13)),
-        const SizedBox(height: 8),
-        Wrap(spacing: 8, runSpacing: 8, children: _buildPaymentIcons()),
-        const SizedBox(height: 16),
-        Text('Siga nossas redes:', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 13)),
-        const SizedBox(height: 8),
-        Row(children: _buildSocialIcons()),
-      ],
-    );
-  }
-
-  Widget _buildFooterColumn(String title, List<String> items) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 14)),
-        const SizedBox(height: 12),
-        ...items.map((item) => Padding(
-              padding: const EdgeInsets.only(bottom: 6),
-              child: Text(item, style: GoogleFonts.poppins(color: Colors.white60, fontSize: 12)),
-            )),
-      ],
-    );
-  }
-
-  List<Widget> _buildPaymentIcons() {
-    final labels = ['VISA', 'MC', 'ELO', 'DINERS', 'PIX'];
-    final colors = [
-      const Color(0xFF1A1F71),
-      const Color(0xFFEB001B),
-      const Color(0xFF00A4E0),
-      const Color(0xFF004A97),
-      const Color(0xFF32BCAD),
-    ];
-    return List.generate(
-      labels.length,
-      (i) => Container(
-        margin: const EdgeInsets.only(right: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        decoration: BoxDecoration(color: colors[i], borderRadius: BorderRadius.circular(4)),
-        child: Text(labels[i], style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold)),
-      ),
-    );
-  }
-
-  List<Widget> _buildSocialIcons() {
-    return [
-      _SocialIcon(icon: Icons.chat_bubble_rounded, color: const Color(0xFF25D366)),
-      const SizedBox(width: 8),
-      _SocialIcon(icon: Icons.camera_alt_rounded, color: UseDevColors.pink),
-      const SizedBox(width: 8),
-      _SocialIcon(icon: Icons.music_note_rounded, color: Colors.white70),
-    ];
-  }
-
-  Widget _buildBottomBar() {
-    return Container(
-      color: UseDevColors.lightGray,
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Text(
-        'Desenvolvido por CaioXyZ. Projeto fictício sem fins comerciais.',
-        textAlign: TextAlign.center,
-        style: GoogleFonts.poppins(fontSize: 12, color: UseDevColors.darkGray),
-      ),
-    );
-  }
-}
-
-class _UseDevLogo extends StatelessWidget {
-  final bool light;
-  const _UseDevLogo({this.light = false});
-
-  @override
-  Widget build(BuildContext context) {
-    final color = light ? UseDevColors.green : UseDevColors.navyDark;
-    return RichText(
-      text: TextSpan(
+  Widget _buildMainContent(bool isMobile, bool isTablet) {
+    if (isMobile) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextSpan(
-            text: 'use\n',
-            style: GoogleFonts.orbitron(fontSize: 18, fontWeight: FontWeight.bold, color: color, height: 1.1),
+          Center(
+            child: Column(
+              children: [
+                Image.asset('assets/Logo e favicon/PNG/Logo UseDev Verde.png', height: 50),
+                const SizedBox(height: 16),
+                Text(
+                  'Hora de abraçar seu lado geek!',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(color: const Color(0xFF80FF00), fontSize: 16),
+                ),
+                const SizedBox(height: 24),
+                Container(width: 250, height: 1, color: const Color(0xFF80FF00)),
+              ],
+            ),
           ),
-          TextSpan(
-            text: 'Dev',
-            style: GoogleFonts.orbitron(fontSize: 18, fontWeight: FontWeight.bold, color: color),
+          const SizedBox(height: 48),
+          _buildColumn('Funcionamento', ['Segunda a Sexta - 8h às 18h', 'sac@usedev.com.br', '0800 541 320']),
+          const SizedBox(height: 40),
+          _buildColumn('Institucional', ['Sobre nós', 'Contato', 'Política de Privacidade', 'LGPD']),
+          const SizedBox(height: 40),
+          _buildColumn('Informações', ['Entregas', 'Garantia', 'Trocas e devoluções']),
+          const SizedBox(height: 48),
+          _buildPaymentSection(),
+          const SizedBox(height: 40),
+          _buildSocialSection(),
+        ],
+      );
+    }
+
+    if (isTablet) {
+      return Column(
+        children: [
+          Image.asset('assets/Logo e favicon/PNG/Logo UseDev Verde.png', height: 50),
+          const SizedBox(height: 16),
+          Text(
+            'Hora de abraçar seu lado geek!',
+            style: GoogleFonts.poppins(color: const Color(0xFF80FF00), fontSize: 16),
+          ),
+          const SizedBox(height: 24),
+          Container(width: double.infinity, height: 1, color: const Color(0xFF80FF00)),
+          const SizedBox(height: 48),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildColumn('Funcionamento', ['Segunda a Sexta - 8h às 18h', 'sac@usedev.com.br', '0800 541 320']),
+              _buildColumn('Institucional', ['Sobre nós', 'Contato', 'Política de Privacidade', 'LGPD']),
+              _buildColumn('Informações', ['Entregas', 'Garantia', 'Trocas e devoluções']),
+            ],
+          ),
+          const SizedBox(height: 60),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildPaymentSection(),
+              _buildSocialSection(),
+            ],
           ),
         ],
-      ),
-    );
-  }
-}
+      );
+    }
 
-class _SocialIcon extends StatelessWidget {
-  final IconData icon;
-  final Color color;
-  const _SocialIcon({required this.icon, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.15),
-          shape: BoxShape.circle,
-          border: Border.all(color: color.withOpacity(0.4)),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset('assets/Logo e favicon/PNG/Logo UseDev Verde.png', height: 50),
+                const SizedBox(height: 16),
+                Text(
+                  'Hora de abraçar seu lado geek!',
+                  style: GoogleFonts.poppins(color: const Color(0xFF80FF00), fontSize: 16),
+                ),
+              ],
+            ),
+            _buildColumn('Funcionamento', ['Segunda a Sexta - 8h às 18h', 'sac@usedev.com.br', '0800 541 320']),
+            _buildColumn('Institucional', ['Sobre nós', 'Contato', 'Política de Privacidade', 'LGPD']),
+            _buildColumn('Informações', ['Entregas', 'Garantia', 'Trocas e devoluções']),
+          ],
         ),
-        child: Icon(icon, color: color, size: 18),
-      ),
+        const SizedBox(height: 40),
+        Container(width: double.infinity, height: 1, color: const Color(0xFF80FF00)),
+        const SizedBox(height: 40),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            _buildPaymentSection(),
+            _buildSocialSection(),
+          ],
+        ),
+      ],
     );
   }
-}
 
-class _GridPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF3333AA).withOpacity(0.25)
-      ..strokeWidth = 0.8;
-
-    final horizonY = size.height * 0.55;
-    final horizonX = size.width * 0.5;
-    const numLines = 14;
-    const numHLines = 10;
-
-    for (int i = 0; i <= numHLines; i++) {
-      final t = i / numHLines;
-      final y = horizonY + (size.height - horizonY) * t;
-      final halfW = size.width * 0.5 * t;
-      canvas.drawLine(Offset(horizonX - halfW, y), Offset(horizonX + halfW, y), paint);
-    }
-
-    for (int i = 0; i <= numLines; i++) {
-      final fraction = i / numLines;
-      final bottomX = size.width * fraction;
-      canvas.drawLine(Offset(horizonX, horizonY), Offset(bottomX, size.height), paint);
-    }
+  Widget _buildColumn(String title, List<String> items) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+        const SizedBox(height: 16),
+        ...items.map((item) => Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Text(item, style: GoogleFonts.poppins(color: Colors.white, fontSize: 14)),
+        )),
+      ],
+    );
   }
 
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  Widget _buildPaymentSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Formas de Pagamento', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            _icon('assets/Ícones/ico-cartao-visa.png'),
+            _icon('assets/Ícones/ico-cartao-master.png'),
+            _icon('assets/Ícones/ico-cartao-elo.png'),
+            _icon('assets/Ícones/ico-cartao-diners.png'),
+            _icon('assets/Ícones/ico-pix.png'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSocialSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Siga nossas redes:', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            _icon('assets/Ícones/Whatsapp.png', size: 32),
+            _icon('assets/Ícones/Instragam.png', size: 32),
+            _icon('assets/Ícones/Tiktok.png', size: 32),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _icon(String path, {double size = 24}) => Padding(
+    padding: const EdgeInsets.only(right: 12),
+    child: Image.asset(path, height: size),
+  );
 }
