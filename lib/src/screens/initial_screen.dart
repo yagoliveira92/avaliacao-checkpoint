@@ -3,115 +3,104 @@ import 'package:flutter/material.dart';
 import 'package:avaliacao_checkpoint/src/screens/widgets/home_banner.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InitialScreen  extends StatefulWidget {
-
+class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
 
   @override
-    State<InitialScreen> createState() => _InitialScreenState();
-  }
+  State<InitialScreen> createState() => _InitialScreenState();
+}
 
-  class _InitialScreenState extends State<InitialScreen> {
-
+class _InitialScreenState extends State<InitialScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar( //aqui é o widget pra fazer a barra de navegação
-        leading: Icon( Icons.menu),
-        title: Row(  //a row serve pra deixar os itens alinhados um ao lado do outro
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [ // a row não tem um fi só, ela tem uma ruma de fi, por isso tem que botar children
-            
-            Image.asset(
-             'assets/images/Logo_UseDev.png', 
-               height: 40,               
-             ),
-            
-            SizedBox(width: 40),
-            Text('Sobre nós'),
-            SizedBox(width: 60),
+    // Lista de produtos organizada
+    final List<Map<String, String>> meusProdutos = [
+      {'nome': 'Camiseta Capy', 'preco': '28,00', 'img': 'assets/images/camisa_capivara.png'},
+      {'nome': 'Mousepad Café', 'preco': '18,00', 'img': 'assets/images/mouse_pad_codigo.png'},
+      {'nome': 'Caneca Bug', 'preco': '28,00', 'img': 'assets/images/caneca_codigo.png'},
+      {'nome': 'Boné 404', 'preco': '25,00', 'img': 'assets/images/bone_404.png'},
+      {'nome': 'Quadro While', 'preco': '22,00', 'img': 'assets/images/quadro_codigo.png'},
+      {'nome': 'Copo Vida de Dev', 'preco': '28,00', 'img': 'assets/images/copo_termico_mestre.png'},
+    ];
 
-            Text('Login'),
+    return Scaffold(
+      appBar: AppBar(
+        leading: const Icon(Icons.menu),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/Logo_UseDev.png',
+              height: 40,
+            ),
+            const SizedBox(width: 40),
+            const Text('Sobre nós'),
+            const SizedBox(width: 60),
+            const Text('Login'),
           ],
-        )
-        ,
- centerTitle: true,
-    bottom: PreferredSize(
-      preferredSize: const Size.fromHeight(80.0), 
-       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Adiciona um espaço nas laterais e embaixo
-              child: TextField(
-                decoration: InputDecoration(
-                  
-                  hintText: 'O que você procura?',
-                  
-                  
-                  suffixIcon: const Icon(Icons.search, color: Colors.black), // O ícone da lupa no final 
-                  
-                  
-                  filled: true,
-                  fillColor: const Color(0xFFEFEFEF), 
-                  
-                  
-                  border: OutlineInputBorder( // Deixa as bordas redondas
-                    borderRadius: BorderRadius.circular(30), 
-                    borderSide: BorderSide.none, 
-                  ),
-                  
-                  contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+        ),
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(80.0),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'O que você procura?',
+                suffixIcon: const Icon(Icons.search, color: Colors.black),
+                filled: true,
+                fillColor: const Color(0xFFEFEFEF),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
                 ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
               ),
             ),
-                      ),
-
+          ),
+        ),
         actions: [
-          Icon( Icons.person_outline), 
-          Icon( Icons.shopping_cart_outlined)],
+          const Icon(Icons.person_outline),
+          const Icon(Icons.shopping_cart_outlined),
+        ],
       ),
-      body: SingleChildScrollView( //  Permite que a página toda role para baixo
-  child: Column(
-    children: [
-      const HomeBanner(), // o banner que eu fiz
-      
-      const SizedBox(height: 20), // espaço entre o banner e o título
-      
-      // 2. Título da Seção
-      Text(
-        'Promos especiais',
-        style: GoogleFonts.orbitron(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: const Color(0xFF090129),
-        ),
-      ),
-
-      const SizedBox(height: 10),
-
-      // 3. O seu GridView
-      GridView.builder(
-        shrinkWrap: true, // isso faz o Grid ocupar só o espaço que precisa
-        physics: const NeverScrollableScrollPhysics(), // O scroll sera o da página toda
-        padding: const EdgeInsets.all(20),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // 2 cards por linha
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
-          childAspectRatio: 1.00, 
-        ),
-        itemCount: 6, // Número de produtos
-        itemBuilder: (context, index) {
-          
-          return const ProductCard( // Aqui chama o widget que eu fiz do card
-            name: 'Camiseta Capy', 
-            price: '28,00', 
-            imagePath: 'assets/images/camisa_capivara.png', 
-          );
-        },
-      ),
-    ],
-  ),
-),
-
-);
-} 
+      body: SingleChildScrollView(
+        child: Column( // A Column organiza os filhos (children) um embaixo do outro.
+          children: [
+            const HomeBanner(),
+            const SizedBox(height: 20),
+            Text(
+              'Promos especiais',
+              style: GoogleFonts.orbitron(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFF090129),
+              ),
+            ),
+            const SizedBox(height: 10),
+            
+           
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: meusProdutos.length,  // Ele conta quantos itens tem na lista (6)
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 1.00,
+              ),
+              itemBuilder: (context, index) {
+                return ProductCard(
+                  name: meusProdutos[index]['nome']!,
+                  price: meusProdutos[index]['preco']!,
+                  imagePath: meusProdutos[index]['img']!,
+                );
+              },
+            ),
+          ], // Fechamento do children da Column
+        ), 
+      ), 
+    ); 
+  }
 }
