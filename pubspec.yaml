@@ -1,0 +1,31 @@
+name: avaliacao_checkpoint
+description: "Projeto Checkpoint 01 - ADS Uninassau"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/Logo e favicon/PNG/Logo UseDev.png
+    - assets/Logo e favicon/PNG/Logo UseDev Verde.png
+    - assets/Imagens/
+    - assets/Ícones/
+    - assets/Imagens/Categorias/Desktop/
+    - assets/Imagens/Categorias/Tablet/
+    - assets/Imagens/Categorias/Mobile/
+    - assets/Imagens/Cards produtos/Cards Home/Mobile/
+    - assets/Imagens/Cards produtos/Cards Home/Desktop e Tablet/
