@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../widgets/hero_section_widget.dart';
 import '../widgets/product_card_widget.dart';
 import '../widgets/categories_section_widget.dart';
+import '../widgets/banner_widget.dart';
+
 import '../data/produtos.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -46,10 +49,13 @@ class _InitialScreenState extends State<InitialScreen> {
                 ),
               ),
             ),
+
             const HeroSection(),
             const SizedBox(height: 20),
+
             const CategoriesSection(),
             const SizedBox(height: 20),
+
             Text(
               'Promos Especiais',
               style: TextStyle(
@@ -59,6 +65,7 @@ class _InitialScreenState extends State<InitialScreen> {
                 color: Colors.black87,
               ),
             ),
+
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -88,6 +95,12 @@ class _InitialScreenState extends State<InitialScreen> {
                 ),
               ),
             ),
+
+            const SizedBox(height: 20),
+
+            const BannerWidget(),
+
+            const SizedBox(height: 20),
           ],
         ),
       ),
