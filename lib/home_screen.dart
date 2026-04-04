@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'product_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -649,24 +650,24 @@ class PromosSection extends StatelessWidget {
         
         final List<Map<String, String>> products = isMobile 
           ? [
-              {'name': 'Camiseta Capy', 'price': '28,00', 'file': 'Imagem produto Capy Mobile.png'},
-              {'name': 'Mousepad Café', 'price': '18,00', 'file': 'Imagem produto Mousepad Mobile.png'},
-              {'name': 'Caneca Bug', 'price': '28,00', 'file': 'Imagem produto Caneca Bug Mobile.png'},
-              {'name': 'Boné 404', 'price': '25,00', 'file': 'Imagem produto Boné 404 Mobile.png'},
-              {'name': 'Quadro While', 'price': '22,00', 'file': 'Imagem produto Quadro Mobile.png'},
-              {'name': 'Copo Vida de Dev', 'price': '28,00', 'file': 'Imagem produto Copo Mobile.png'},
-              {'name': 'Abridor de garrafa', 'price': '12,00', 'file': 'Imagem produto Abridor Mobile.png'},
-              {'name': 'Camiseta Estágios', 'price': '35,00', 'file': 'Imagem produto Camiseta Mobile.png'}, 
+              {'name': 'Camiseta Capy', 'price': '28,00', 'file': 'Imagem produto Capy Mobile.png', 'desc': 'A queridinha dos devs. Algodão premium com a mascote mais relaxada da TI.'},
+              {'name': 'Mousepad Café', 'price': '18,00', 'file': 'Imagem produto Mousepad Mobile.png', 'desc': 'Deslize perfeito para o seu mouse e proteção para sua mesa com estilo cafeinado.'},
+              {'name': 'Caneca Bug', 'price': '28,00', 'file': 'Imagem produto Caneca Bug Mobile.png', 'desc': 'Para tomar aquele café enquanto caça bugs que não deveriam existir.'},
+              {'name': 'Boné 404', 'price': '25,00', 'file': 'Imagem produto Boné 404 Mobile.png', 'desc': 'Estilo encontrado, erro 404. Proteção solar com a cara do front-end.'},
+              {'name': 'Quadro While', 'price': '22,00', 'file': 'Imagem produto Quadro Mobile.png', 'desc': 'Loop infinito de bom gosto para decorar o seu setup de trabalho.'},
+              {'name': 'Copo Vida de Dev', 'price': '28,00', 'file': 'Imagem produto Copo Mobile.png', 'desc': 'Mantenha sua hidratação em dia entre um commit e outro.'},
+              {'name': 'Abridor de garrafa', 'price': '12,00', 'file': 'Imagem produto Abridor Mobile.png', 'desc': 'A ferramenta definitiva para o happy hour pós-deploy.'},
+              {'name': 'Camiseta Estágios', 'price': '35,00', 'file': 'Imagem produto Camiseta Mobile.png', 'desc': 'As 5 fases do luto, ou melhor, as 5 fases de um bug no código.'}, 
             ]
           : [
-              {'name': 'Camiseta Capy', 'price': '28,00', 'file': 'Card Produto Camiseta.png'}, 
-              {'name': 'Mousepad Café', 'price': '18,00', 'file': 'Card Produto Mousepad.png'},
-              {'name': 'Caneca Bug', 'price': '28,00', 'file': 'Card Produto Caneca Bug.png'},
-              {'name': 'Boné 404', 'price': '25,00', 'file': 'Card Produto Boné 404.png'},
-              {'name': 'Quadro While', 'price': '22,00', 'file': 'Card Produto Quadro.png'},
-              {'name': 'Copo Vida de Dev', 'price': '28,00', 'file': 'Card Produto Copo.png'},
-              {'name': 'Abridor de garrafa', 'price': '12,00', 'file': 'Card Produto Abridor.png'},
-              {'name': 'Camiseta Estágios', 'price': '35,00', 'file': 'Card Produto Camiseta.png'}, 
+              {'name': 'Camiseta Capy', 'price': '28,00', 'file': 'Card Produto Camiseta.png', 'desc': 'A queridinha dos devs. Algodão premium com a mascote mais relaxada da TI.'}, 
+              {'name': 'Mousepad Café', 'price': '18,00', 'file': 'Card Produto Mousepad.png', 'desc': 'Deslize perfeito para o seu mouse e proteção para sua mesa com estilo cafeinado.'},
+              {'name': 'Caneca Bug', 'price': '28,00', 'file': 'Card Produto Caneca Bug.png', 'desc': 'Para tomar aquele café enquanto caça bugs que não deveriam existir.'},
+              {'name': 'Boné 404', 'price': '25,00', 'file': 'Card Produto Boné 404.png', 'desc': 'Estilo encontrado, erro 404. Proteção solar com a cara do front-end.'},
+              {'name': 'Quadro While', 'price': '22,00', 'file': 'Card Produto Quadro.png', 'desc': 'Loop infinito de bom gosto para decorar o seu setup de trabalho.'},
+              {'name': 'Copo Vida de Dev', 'price': '28,00', 'file': 'Card Produto Copo.png', 'desc': 'Mantenha sua hidratação em dia entre um commit e outro.'},
+              {'name': 'Abridor de garrafa', 'price': '12,00', 'file': 'Card Produto Abridor.png', 'desc': 'A ferramenta definitiva para o happy hour pós-deploy.'},
+              {'name': 'Camiseta Estágios', 'price': '35,00', 'file': 'Card Produto Camiseta.png', 'desc': 'As 5 fases do luto, ou melhor, as 5 fases de um bug no código.'}, 
             ];
 
         int crossAxisCount = isMobile ? 1 : (isTablet ? 2 : 4);
@@ -698,11 +699,27 @@ class PromosSection extends StatelessWidget {
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
-                  return _buildProductCard(
-                    products[index]['name']!,
-                    products[index]['price']!,
-                    products[index]['file']!,
-                    deviceFolder,
+                  final item = products[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(
+                            name: item['name']!,
+                            price: item['price']!,
+                            imagePath: 'assets/Imagens/Cards produtos/Cards Home/$deviceFolder/${item['file']}',
+                            description: item['desc']!,
+                          ),
+                        ),
+                      );
+                    },
+                    child: _buildProductCard(
+                      item['name']!,
+                      item['price']!,
+                      item['file']!,
+                      deviceFolder,
+                    ),
                   );
                 },
               ),
@@ -775,7 +792,7 @@ class PromosSection extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  price,
+                  "R\$ $price",
                   style: GoogleFonts.orbitron(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
