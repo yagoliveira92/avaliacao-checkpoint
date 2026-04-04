@@ -35,7 +35,7 @@ class HomeBanner extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 
-                Padding( // Texto "Hora de abraçar seu lado geek!"
+                Padding( // texto "Hora de abraçar seu lado geek!"
                   padding: const EdgeInsets.symmetric(horizontal: 20), 
                   child: RichText(
                     textAlign: TextAlign.center,
@@ -61,7 +61,7 @@ class HomeBanner extends StatelessWidget {
                 const SizedBox(height: 25),
 
                 
-                ElevatedButton( // Botão "ver a novidades"
+                ElevatedButton( // botão "ver a novidades"
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF780BF7), 
