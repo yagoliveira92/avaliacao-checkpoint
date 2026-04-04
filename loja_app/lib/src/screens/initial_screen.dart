@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/hero_section_widget.dart';
 import '../widgets/product_card_widget.dart';
+import '../widgets/categories_section_widget.dart';
 import '../data/produtos.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -26,55 +27,53 @@ class _InitialScreenState extends State<InitialScreen> {
           SizedBox(width: 25),
         ],
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 430),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      hintText: 'O que você procura?',
-                      suffixIcon: const Icon(Icons.search),
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: TextField(
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  hintText: 'O que você procura?',
+                  suffixIcon: const Icon(Icons.search),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32),
+                    borderSide: BorderSide.none,
                   ),
                 ),
-                const HeroSection(),
-                Text(
-                  'Promos Especiais',
-                  style: TextStyle(
-                    fontFamily: GoogleFonts.orbitron().fontFamily,
-                    fontSize: 27,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: produtos.length,
-                  itemBuilder: (context, index) {
-                    final produto = produtos[index];
-
-                    return ProductCardWidget(
-                      name: produto.name,
-                      price: produto.price,
-                      image: produto.image,
-                    );
-                  },
-                ),
-              ],
+              ),
             ),
-          ),
+            const HeroSection(),
+            const SizedBox(height: 20),
+            const CategoriesSection(),
+            const SizedBox(height: 20),
+            Text(
+              'Promos Especiais',
+              style: TextStyle(
+                fontFamily: GoogleFonts.orbitron().fontFamily,
+                fontSize: 27,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: produtos.length,
+              itemBuilder: (context, index) {
+                final produto = produtos[index];
+
+                return ProductCardWidget(
+                  name: produto.name,
+                  price: produto.price,
+                  image: produto.image,
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
