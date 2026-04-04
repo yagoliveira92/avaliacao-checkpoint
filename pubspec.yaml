@@ -21,3 +21,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/Logo e favicon/PNG/Logo UseDev.png
+    - assets/Logo e favicon/PNG/Logo UseDev Verde.png
+    - assets/Imagens/
+    - assets/Ícones/
+    - assets/Imagens/Categorias/Desktop/
+    - assets/Imagens/Categorias/Tablet/
+    - assets/Imagens/Categorias/Mobile/
+    - assets/Imagens/Cards produtos/Cards Home/Mobile/
+    - assets/Imagens/Cards produtos/Cards Home/Desktop e Tablet/
