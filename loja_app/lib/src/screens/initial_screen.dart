@@ -74,19 +74,16 @@ class _InitialScreenState extends State<InitialScreen> {
               },
             ),
 
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Ver mais',
-                    style: TextStyle(
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                      color: const Color(0xFF7800F7),
-                      fontWeight: FontWeight.bold,
-                    ),
+            Center(
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Ver mais',
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.poppins().fontFamily,
+                    color: const Color(0xFF7800F7),
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
                   ),
                 ),
               ),
