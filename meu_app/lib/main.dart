@@ -35,7 +35,19 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Loja Sem Nome")),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF0D47A1),
+        title: Row(
+          children: [
+            Icon(Icons.store, color: Colors.white),
+            SizedBox(width: 10),
+            Text(
+              "Casas Sergipe",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+          ],
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
