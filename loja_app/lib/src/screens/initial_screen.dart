@@ -5,6 +5,7 @@ import '../widgets/hero_section_widget.dart';
 import '../widgets/product_card_widget.dart';
 import '../widgets/categories_section_widget.dart';
 import '../widgets/banner_widget.dart';
+import '../widgets/footer_widget.dart';
 
 import '../data/produtos.dart';
 
@@ -101,6 +102,8 @@ class _InitialScreenState extends State<InitialScreen> {
             const BannerWidget(),
 
             const SizedBox(height: 20),
+
+            const FooterWidget(),
           ],
         ),
       ),
