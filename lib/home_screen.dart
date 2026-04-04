@@ -74,58 +74,61 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildNavBar(bool isMobile) {
     return Container(
       color: UseDevColors.white,
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 40, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 80, vertical: 20),
       child: isMobile ? _buildMobileNav() : _buildDesktopNav(),
     );
   }
 
-  Widget _buildDesktopNav() {
-    return Row(
-      children: [
-        const _UseDevLogo(),
-        const SizedBox(width: 40),
-        Text('Sobre nós', style: GoogleFonts.poppins(fontSize: 15, color: UseDevColors.navyDark)),
-        const SizedBox(width: 24),
-        Expanded(
-          child: Container(
-            height: 44,
-            decoration: BoxDecoration(color: const Color(0xFFF0F0F0), borderRadius: BorderRadius.circular(22)),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'O que você procura?',
-                hintStyle: GoogleFonts.poppins(fontSize: 14, color: UseDevColors.darkGray),
-                suffixIcon: const Icon(Icons.search, color: UseDevColors.darkGray),
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+Widget _buildDesktopNav() {
+  return Row(
+    children: [
+      Image.asset('assets/Logo e favicon/PNG/Logo UseDev.png', height: 40),
+      const SizedBox(width: 32),
+      Text('Sobre nós', style: GoogleFonts.poppins(fontSize: 15, color: UseDevColors.navyDark)),
+      const SizedBox(width: 24),
+Expanded(
+  child: Container(
+    height: 52,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(32),
+      border: Border.all(color: const Color(0xFFD0D0D0), width: 1),    ),
+    child: TextField(
+      controller: _searchController,
+      decoration: InputDecoration(
+        hintText: 'O que você procura?',
+        hintStyle: GoogleFonts.poppins(fontSize: 14, color: UseDevColors.darkGray),
+        suffixIcon: const Icon(Icons.search, color: UseDevColors.darkGray, size: 22),
+        border: InputBorder.none,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      ),
+    ),
+  ),
+),
+      const SizedBox(width: 24),
+      Text('Login', style: GoogleFonts.poppins(fontSize: 15, color: UseDevColors.navyDark)),
+      const SizedBox(width: 20),
+      const Icon(Icons.person_outline_rounded, color: UseDevColors.navyDark, size: 26),
+      const SizedBox(width: 16),
+      Stack(
+        children: [
+          const Icon(Icons.shopping_cart_outlined, color: UseDevColors.navyDark, size: 26),
+          if (_cartCount > 0)
+            Positioned(
+              right: 0,
+              top: 0,
+              child: Container(
+                width: 14,
+                height: 14,
+                decoration: const BoxDecoration(color: UseDevColors.pink, shape: BoxShape.circle),
+                child: Center(child: Text('$_cartCount', style: const TextStyle(color: Colors.white, fontSize: 8))),
               ),
             ),
-          ),
-        ),
-        const SizedBox(width: 24),
-        Text('Login', style: GoogleFonts.poppins(fontSize: 15, color: UseDevColors.navyDark)),
-        const SizedBox(width: 20),
-        const Icon(Icons.person_outline_rounded, color: UseDevColors.navyDark, size: 26),
-        const SizedBox(width: 16),
-        Stack(
-          children: [
-            const Icon(Icons.shopping_cart_outlined, color: UseDevColors.navyDark, size: 26),
-            if (_cartCount > 0)
-              Positioned(
-                right: 0,
-                top: 0,
-                child: Container(
-                  width: 14,
-                  height: 14,
-                  decoration: const BoxDecoration(color: UseDevColors.pink, shape: BoxShape.circle),
-                  child: Center(child: Text('$_cartCount', style: const TextStyle(color: Colors.white, fontSize: 8))),
-                ),
-              ),
-          ],
-        ),
-      ],
-    );
-  }
+        ],
+      ),
+    ],
+  );
+}
 
   Widget _buildMobileNav() {
     return Row(
