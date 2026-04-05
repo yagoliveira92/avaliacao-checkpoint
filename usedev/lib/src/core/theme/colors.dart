@@ -19,8 +19,10 @@ class AppColors {
   static const Color textLight = Color(0xFFFFFFFF);
   static const Color textSecondary = Color(0xFF444444);
   static const Color textMuted = Color(0xFFB0B0C0);
+  static const Color textDark = Color(0xFF1E1E1E);
+  static const Color textBrown = Color(0xFF312E2E);
 
-  // Categorias ✅ novo
+  // Categorias
   static const Color categoryTitle = Color(0xFF0B254B);
   static const Color categoryDescription = Color(0xFF5E6E89);
   static const Color categoryShadow = Color(0xFF787B7B);
