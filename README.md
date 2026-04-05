@@ -46,7 +46,8 @@ Quando finalizar o desenvolvimento:
 2. Clique na aba **Pull Requests**.
 3. Clique no botão **New Pull Request**.
 4. Certifique-se de que a comparação é entre o seu fork (`head repository`) e este repositório original (`base repository`).
-5. Dê um título claro ao seu PR (ex: "Entrega do Checkpoint 1 - [Seu Nome]") e clique em **Create Pull Request**.
+5. Dê o nome do PR baseado na sua turma, seguindo o modelo: Checkpoint 01 - <CURSO><TURMA>. Ex.: (Checkpoint 01 -  ADS C)
+6. Coloque no corpo a Matrícula e o nome de cada integrante do grupo (Ex.? 160101999 - Adamastor Ostrogésio da Silva) e clique em **Create Pull Request**.
 
 ## 🤖 Avaliação Automática
 Assim que você abrir o PR, um fluxo de trabalho (Workflow) será acionado. O **Gemini** analisará:
