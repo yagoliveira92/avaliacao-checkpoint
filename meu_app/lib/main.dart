@@ -8,16 +8,65 @@ class Product {
   final String name;
   final double price;
   final String image;
+  final String description;
 
-  Product(this.name, this.price, this.image);
+  Product(this.name, this.price, this.image, this.description);
 }
 
 class MyApp extends StatelessWidget {
   final List<Product> products = [
-    Product("Celular", 1500, "https://via.placeholder.com/150"),
-    Product("Notebook", 3500, "https://via.placeholder.com/150"),
-    Product("Fone", 200, "https://via.placeholder.com/150"),
-    Product("Mouse", 150, "https://via.placeholder.com/150"),
+    Product(
+      "Lava-Louças Sandung DW50C6070FS/AZ 10 Serviços com Display de LED 220V Inox",
+      3003.05,
+      "https://imgs.casasbahia.com.br/55061462/1g.jpg?imwidth=500",
+      "Tipo: Piso. Características Gerais: Menos barulho. Menos incômodo. Programas de lavagem: Auto, Normal, Delicado, Pesado,",
+    ),
+    Product(
+      "Geladeira Panamario Inverse 475L Frost Free BB64X Aço Escovado - 220V",
+      4899.00,
+      "https://imgs.casasbahia.com.br/55072018/1g.png?imwidth=500",
+      "Tipo de Degelo: Frost Free. Porta Reversível: Não. Porta do freezer aproveitável: Não. Dispenser de água: Não.",
+    ),
+    Product(
+      "Smart TV 65 Polegadas 8K Sandung Neo QLED Ultra QN65QN900FGXZD 120Hz Processador NQ8 AI Gen2 Preto Titan",
+      9214.00,
+      "https://imgs.casasbahia.com.br/55070761/1xg.jpg?imwidth=500",
+      "Conversor para TV digital integrado. Tamanho da tela: 60 a 69 polegadas.",
+    ),
+
+    Product(
+      "Liquidificador Montreal Turbo L-1100 3L 1100W 12 Velocidades Preto/Inox - 110V",
+      129.50,
+      "https://imgs.casasbahia.com.br/55033544/1g.jpg?imwidth=5000",
+      "Velocidades: Acima de 5. Características: Com filtro, Autolimpante, Triturador. Funsão Pulsar.",
+    ),
+
+    Product(
+      "Purificador de Água Electrojinx PE11B com Painel Touch Bivolt",
+      464.10,
+      "https://imgs.casasbahia.com.br/11688765/4xg.jpg?imwidth=500",
+      "2 Estágios de filtragem. Sem Função retrolavagem. Sem Bica móvel.",
+    ),
+    Product(
+      "Notebook Gamer Jokers Nitro V15 ANV15-41-R2GT AMD Reyzin™ 7 7735HS RTX 4050 16 GB RAM 512 GB SSD Full HD 15.6”",
+      6269.05,
+      "https://imgs.casasbahia.com.br/1578080955/4xg.jpg?imwidth=500",
+      "Tipo Notebook Gamer. AMD Reyzin™ 7 7735HS.16 MB Smart Cache.",
+    ),
+
+    Product(
+      "Cadeira Gamer Pitchau Azul - CGF022-A",
+      356.23,
+      "https://imgs.casasbahia.com.br/1579807615/1xg.jpg?imwidth=500",
+      "A cadeira ideal para qualquer tipo de ambiente. Seja para trabalhar, estudar ou para seu lazer.",
+    ),
+
+    Product(
+      "Pear iFone 15 128GB 6,1 48MP Azul",
+      4273.10,
+      "https://imgs.casasbahia.com.br/55065309/1g.jpg?imwidth=500",
+      "Memória total: 128GB. Tecnologia GSM, 3G, 4G, 5G. Tela Acima de 6'",
+    ),
   ];
 
   @override
@@ -38,7 +87,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 90,
-        backgroundColor: Color.fromARGB(255, 171, 198, 238),
+        backgroundColor: Color.fromARGB(255, 16, 4, 177),
         centerTitle: true,
         title: Image.asset('assets/logo.png', height: 80),
       ),
@@ -49,10 +98,10 @@ class HomePage extends StatelessWidget {
             child: GridView.builder(
               padding: EdgeInsets.all(10),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // 2 Cards p/ linha
+                crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: 0.75, // Altura dos Cards
+                childAspectRatio: 0.75,
               ),
               itemCount: products.length,
               itemBuilder: (context, index) {
@@ -73,7 +122,7 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // IMAGENS
+                      // Imagens
                       Expanded(
                         child: ClipRRect(
                           borderRadius: BorderRadius.vertical(
@@ -86,23 +135,48 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
 
-                      // TEXTOS
+                      // Textos
                       Padding(
                         padding: EdgeInsets.all(8),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // Títulos
                             Text(
                               product.name,
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
+
                             SizedBox(height: 4),
-                            Text("R\$ ${product.price}"),
+
+                            // Descrições
+                            Text(
+                              product.description,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+
+                            SizedBox(height: 6),
+
+                            // Preços
+                            Text(
+                              "R\$ ${product.price}",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),
 
-                      // BOTÕES
+                      // Botões
                       Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 8,
@@ -126,7 +200,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-          // SEÇÃO DE INSERIR EMAIL
+          // Seção de E-mail
           Padding(
             padding: EdgeInsets.all(10),
             child: Container(
