@@ -202,39 +202,87 @@ class HomePage extends StatelessWidget {
 
           // Seção de E-mail
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(12),
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 6,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "Cadastre E-mail pra receber promoções:",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    "Receba ofertas incríveis!",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF333333),
+                    ),
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 6),
+                  Text(
+                    "Cadastre seu e-mail e fique por dentro das promoções",
+                    style: TextStyle(fontSize: 13, color: Color(0xFF666666)),
+                  ),
+                  SizedBox(height: 12),
+
                   TextField(
                     controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      hintText: "Digite seu email",
+                      hintText: "Digite seu e-mail",
+                      filled: true,
+                      fillColor: Colors.white,
+                      prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Color(0xFFDDDDDD)),
                       ),
                     ),
                   ),
-                  SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Email cadastrado!")),
-                      );
-                    },
-                    child: Text("Cadastrar"),
+
+                  SizedBox(height: 12),
+
+                  SizedBox(
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (emailController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Digite um e-mail válido")),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("E-mail cadastrado com sucesso!"),
+                            ),
+                          );
+                          emailController.clear();
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF052b82),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        "Cadastrar",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
