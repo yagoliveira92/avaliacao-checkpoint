@@ -1,0 +1,22 @@
+name: loja_online
+description: A new Flutter project.
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/akatsuki_logo.png
+    - assets/images/camiseta.png
+    - assets/images/moletom.png
+    - assets/images/anel.png
+    - assets/images/mascara.png
