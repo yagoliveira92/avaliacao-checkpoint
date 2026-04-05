@@ -1,0 +1,13 @@
+# Flutter/Dart pro flutter
+.dart_tool/
+.packages
+build/
+
+
+# Gerado pelo IDE isso ai
+.idea/
+*.iml
+*.iml.*
+
+# gerou na hora q upei na web
+web/

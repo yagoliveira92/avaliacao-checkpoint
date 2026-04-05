@@ -1,0 +1,33 @@
+name: grr_imports
+description: GRR Imports — trabalho do mano yago.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/yago-banner.jpg
+    - assets/images/naruto.png
+    - assets/images/dilma.png
+    - assets/images/ben10.png
+    - assets/images/hi-men.png
+    - assets/images/zapzapicon.png
+    - assets/images/instaicon.png
+    - assets/images/tiktokicon.png
+    - assets/images/visacicon.png
+    - assets/images/mastecardicon.png
+    - assets/images/pix.png
+    - assets/images/eloicon.png
